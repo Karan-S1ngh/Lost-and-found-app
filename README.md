@@ -8,7 +8,7 @@ Lost and Found App simplifies the process of reporting lost items and connecting
 
 ## Table of Contents
 
-- [GettingStarted](#Resources)
+- [Resources](#Resources)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
