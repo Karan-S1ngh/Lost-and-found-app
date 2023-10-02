@@ -6,6 +6,7 @@ Lost and Found App is a mobile application designed to help users report lost it
 
 Lost and Found App simplifies the process of reporting lost items and connecting with others who might have found them. The app allows users to create detailed posts, including item descriptions and images, making it easier for others to identify and return lost items.
 
+
 ## Table of Contents
 
 - [Resources](#Resources)
@@ -14,6 +15,7 @@ Lost and Found App simplifies the process of reporting lost items and connecting
 - [Features](#features)
 - [Contributing](#contributing)
 - [License](#license)
+
 
 ## Resources
 
@@ -26,6 +28,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+
 ## Installation
 
 To run the Lost and Found App locally, follow these steps:
@@ -35,6 +38,7 @@ To run the Lost and Found App locally, follow these steps:
 3. Install dependencies: `flutter pub get`
 4. Run the app: `flutter run`
 
+
 ## Usage
 
 Once the app is installed, users can:
@@ -43,12 +47,14 @@ Once the app is installed, users can:
 - **View Lost Item Posts:** Explore posts created by others to identify lost items matching your search criteria.
 - **Claim a Found Item:** If you find an item that matches a lost post, tap on the 'Claim' button to connect with the owner.
 
+
 ## Features
 
 - **User Authentication:** Secure user accounts and authentication system.
 - **Image Upload:** Users can upload images of lost items to enhance visibility.
 - **Real-time Notifications:** Receive notifications for new posts and claimed items.
 - **Interactive Interface:** Intuitive user interface for seamless navigation and interaction.
+
 
 ## Contributing
 
@@ -59,6 +65,7 @@ We welcome contributions from the community! To contribute to Lost and Found App
 3. Make your changes and commit them: `git commit -m 'Add feature'`
 4. Push to the branch: `git push origin feature-name`
 5. Submit a pull request by clicking on the 'New Pull Request' button.
+
 
 ## License
 
