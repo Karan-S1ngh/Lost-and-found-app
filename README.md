@@ -14,7 +14,7 @@ Lost and Found App simplifies the process of reporting lost items and connecting
 - [Usage](#usage)
 - [Features](#features)
 - [Contributing](#contributing)
-'''- [License](#license)'''
+<!-- - [License](#license) -->
 
 
 ## Resources
@@ -67,8 +67,8 @@ We welcome contributions from the community! To contribute to Lost and Found App
 5. Submit a pull request by clicking on the 'New Pull Request' button.
 
 
-'''
+<!--
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-'''
+-->
