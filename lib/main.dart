@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/home_page.dart';
+import 'package:test/first_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -9,22 +9,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Your App Name',
-      home: MyHomePage(),
+      title: 'Lost and Found App',
+      home: FirstPage(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const HomePage();
   }
 }

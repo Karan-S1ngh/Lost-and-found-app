@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           BarItem(
             text: "Lost",
             iconData: Icons.blur_off,
-            color: const Color(0xFF012b72),
+            color: const Color.fromARGB(0, 137, 9, 137),
           ),
           BarItem(
             text: "Found",
