@@ -6,8 +6,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double fem = screenHeight /
-        812; // Adjust based on your design requirements
+    double fem = screenHeight / 812; // Adjust based on your design requirements
     double ffem = 1; // Assuming it's 1, adjust as needed for font scaling
     const imageUrl =
         'https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/72022318511/original/EeVpBS7LD8M10kPxO4qhetyjimdrqwbVeg.png?1664541628';
