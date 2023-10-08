@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/home_page.dart';
+import 'package:test/first_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -9,10 +9,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Your App Name',
-      home: MyHomePage(),
+      title: 'Lost and Found App',
+      home: FirstPage(),
     );
   }
+<<<<<<< HEAD
 }
 
 class MyHomePage extends StatefulWidget {
@@ -29,3 +30,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 //heeeeelooooo
+=======
+}
+>>>>>>> e17755d1b8bff58c544f63e328097807ad4a87c3
