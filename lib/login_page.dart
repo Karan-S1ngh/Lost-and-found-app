@@ -5,14 +5,17 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double fem = MediaQuery.of(context).size.height / 812; // Adjust based on your design requirements
+    double screenHeight = MediaQuery.of(context).size.height;
+    double fem = screenHeight /
+        812; // Adjust based on your design requirements
     double ffem = 1; // Assuming it's 1, adjust as needed for font scaling
-        const imageUrl = 'https://images.app.goo.gl/ep3WvVCxRr6zoyZu8';
+    const imageUrl =
+        'https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/72022318511/original/EeVpBS7LD8M10kPxO4qhetyjimdrqwbVeg.png?1664541628';
 
     return Scaffold(
       body: Container(
         width: double.infinity,
-        height: 812 * fem,
+        height: screenHeight,
         decoration: const BoxDecoration(
           color: Color(0xffffffff),
         ),
@@ -130,7 +133,8 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(21.5 * fem, 0, 16.5 * fem, 0),
+                          margin:
+                              EdgeInsets.fromLTRB(21.5 * fem, 0, 16.5 * fem, 0),
                           width: double.infinity,
                           height: 1 * fem,
                           decoration: const BoxDecoration(
@@ -276,4 +280,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
