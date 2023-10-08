@@ -24,47 +24,49 @@ class LoginInPage extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           color: const Color.fromARGB(255, 127, 18, 163), // Desired color here
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'WELCOME BACK',
-                style: TextStyle(
-                  fontSize: 35 * fem,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF000000),
-                ),
-              ),
-              SizedBox(height: 50 * fem), 
-              _buildInputField('EMAIL', fem),
-              SizedBox(height: 40 * fem), 
-              _buildInputField1('PASSWORD', fem),
-              SizedBox(height: 50 * fem), 
-              GestureDetector(
-                onTap: () {
-                  // Navigate to the password recovery page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const PasswordRecoveryPage();
-                      },
-                    ),
-                  );
-                },
-                child: Text(
-                  'Forgot Password?',
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'WELCOME BACK',
                   style: TextStyle(
-                    fontSize: 20 * fem,
+                    fontSize: 35 * fem,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFFFFFFFF),
-                    decoration: TextDecoration.underline,
+                    color: const Color(0xFF000000),
                   ),
                 ),
-              ),
-              SizedBox(height: 20 * fem),
-              _buildLoginInButton(fem),
-            ],
+                SizedBox(height: 50 * fem), 
+                _buildInputField('EMAIL', fem),
+                SizedBox(height: 40 * fem), 
+                _buildInputField1('PASSWORD', fem),
+                SizedBox(height: 50 * fem), 
+                GestureDetector(
+                  onTap: () {
+                    // Navigate to the password recovery page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const PasswordRecoveryPage();
+                        },
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Forgot Password?',
+                    style: TextStyle(
+                      fontSize: 20 * fem,
+                      fontWeight: FontWeight.w700,
+                      color: const Color(0xFFFFFFFF),
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20 * fem),
+                _buildLoginInButton(fem),
+              ],
+            ),
           ),
         ),
       ),

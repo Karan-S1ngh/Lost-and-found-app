@@ -37,7 +37,7 @@ class _OnClickFABState extends State<OnClickFAB> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xFF00b9f5),
+        backgroundColor: const Color.fromARGB(255, 182, 4, 242),
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -123,7 +123,7 @@ class _OnClickFABState extends State<OnClickFAB> {
               Align(
                 alignment: Alignment.centerRight,
                 child: RawMaterialButton(
-                  fillColor: const Color(0xFF00b9f5),
+                  fillColor: const Color.fromARGB(255, 182, 4, 242),
                   constraints: const BoxConstraints(
                     minWidth: 100,
                     minHeight: 50,

@@ -34,7 +34,7 @@ class LostInformCards extends StatelessWidget {
                 height: 220,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: const Color(0xFF00b9f5),
+                  color: const Color.fromARGB(255, 182, 4, 242),
                   boxShadow: const [
                     BoxShadow(
                       color: Color(0x4D000000),

@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF00b9f5),
+        backgroundColor: const Color.fromARGB(255, 182, 4, 242),
         title: Align(
           alignment: Alignment.center,
           child: Text(
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF00b9f5),
+        backgroundColor:const Color.fromARGB(255, 182, 4, 242),
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
         onPressed: () {
@@ -48,14 +48,15 @@ class _HomePageState extends State<HomePage> {
         barItems: [
           BarItem(
             text: "Lost",
-            iconData: Icons.blur_off,
-            color: const Color.fromARGB(0, 137, 9, 137),
+            iconData: Icons.blur_on,
+            color: const Color.fromARGB(255, 182, 4, 242),
           ),
           BarItem(
             text: "Found",
             iconData: Icons.blur_on,
-            color: const Color(0xFF012b72),
+            color: const Color.fromARGB(255, 182, 4, 242),
           ),
+
         ],
         animationDuration: const Duration(milliseconds: 150),
         barStyle: BarStyle(fontSize: 23.0, iconSize: 30.0),

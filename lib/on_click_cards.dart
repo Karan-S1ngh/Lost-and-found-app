@@ -17,7 +17,7 @@ class OnClickCards extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF00b9f5),
+        backgroundColor: const Color.fromARGB(255, 182, 4, 242),
         title: const Align(
           alignment: Alignment.center,
           child: Text(
