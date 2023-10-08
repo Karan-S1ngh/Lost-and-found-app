@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget {
-    const SignUpPage({super.key});
-
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,45 +9,37 @@ class SignUpPage extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double fem = screenWidth / 414; // Assuming design width is 414
 
-    const imageUrl =
-        'https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/72022318511/original/EeVpBS7LD8M10kPxO4qhetyjimdrqwbVeg.png?1664541628';
-
     return Scaffold(
       body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color:  Color(0xFFFFFFFF),
+          color: Color.fromARGB(255, 182, 4, 242), // Desired background color here
         ),
         child: Container(
-          padding: EdgeInsets.fromLTRB(0, screenHeight * 0.2, 0, screenHeight * 0.1),
+          padding:
+              EdgeInsets.fromLTRB(0, screenHeight * 0.2, 0, screenHeight * 0.1),
           width: double.infinity,
           height: double.infinity,
-          decoration: const BoxDecoration(
-            color:  Color(0xFFA8CCD7),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(imageUrl),
-            ),
-          ),
+          color: const Color.fromARGB(255, 127, 18, 163), // Desired color here
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 'NEW ACCOUNT',
                 style: TextStyle(
-                  fontSize: 32 * fem,
+                  fontSize: 35 * fem,
                   fontWeight: FontWeight.w700,
                   color: const Color(0xFF000000),
                 ),
               ),
-              SizedBox(height: 20 * fem),
+              SizedBox(height: 45 * fem),
               _buildInputField('EMAIL', fem),
-              SizedBox(height: 15 * fem),
+              SizedBox(height: 35 * fem),
               _buildInputField('USERNAME', fem),
-              SizedBox(height: 15 * fem),
+              SizedBox(height: 45 * fem),
               _buildInputField('PASSWORD', fem),
-              SizedBox(height: 20 * fem),
+              SizedBox(height: 50 * fem),
               _buildSignUpButton(fem),
             ],
           ),

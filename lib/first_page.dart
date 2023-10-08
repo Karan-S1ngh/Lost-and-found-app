@@ -1,109 +1,89 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // Import your login page file here
-import 'signup_page.dart'; // Import your signup page file here
-
+import 'login_page.dart';
+import 'signup_page.dart';
 
 class FirstPage extends StatelessWidget {
     const FirstPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double fem = screenWidth / 414;
-    double ffem = 1;
-
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.fromLTRB(20 * fem, 35 * fem, 22 * fem, 87 * fem),
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          color: Color(0xff301934),
-        ),
+      backgroundColor: const Color(0xFF301934),
+      body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 13 * fem, 595 * fem),
-              constraints: BoxConstraints(maxWidth: 285 * fem),
+              margin: const EdgeInsets.only(bottom: 20),
+              constraints: const BoxConstraints(
+                maxWidth: 300,
+              ),
               child: RichText(
-                text: TextSpan(
+                textAlign: TextAlign.center,
+                text: const TextSpan(
+                  text: 'CAMPUS LOST AND FOUND APP\n',
                   style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 18 * ffem,
+                    fontSize: 20,
                     fontWeight: FontWeight.w700,
-                    height: 1.2125 * ffem / fem,
-                    color:const  Color(0xffffffff),
+                    color: Colors.white,
                   ),
                   children: [
-                    const TextSpan(
-                      text: 'CAMPUS LOST AND FOUND APP\n',
-                    ),
                     TextSpan(
-                      text: '      Find What’s Yours Campus Yours',
+                      text: ' “Find What’s Yours Campus Is Wide”  ',
                       style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 15 * ffem,
+                        fontSize: 17,
                         fontWeight: FontWeight.w700,
-                        height: 1.2125 * ffem / fem,
-                        color:const  Color(0xffffffff),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
+            const Icon(
+              Icons.search_rounded,
+              size: 200,
+              color: Colors.white,
+            ),
+            const SizedBox(height: 30),
             SizedBox(
-              width: double.infinity,
-              height: 42 * fem,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LoginPage()),
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 74 * fem, 0 * fem),
-                      width: 122 * fem,
-                      height: 42 * fem,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16 * fem),
-                        color:const Color(0xffd9d9d9),
-                      ),
-                    ),
+              width: 122,
+              height: 42,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginInPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFD9D9D9),
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const SignUpPage()),
-                      );
-                    },
-                    child: Container(
-                      width: 122 * fem,
-                      height: 42 * fem,
-                      decoration: BoxDecoration(
-                        color:const  Color(0xffd9d9d9),
-                        borderRadius: BorderRadius.circular(16 * fem),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'SIGN UP',
-                          style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 15 * ffem,
-                            fontWeight: FontWeight.w700,
-                            height: 1.2125 * ffem / fem,
-                            color: const Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                    ),
+                ),
+                child: const Text('LOGIN'),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 122,
+              height: 42,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignUpPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFD9D9D9),
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                ],
+                ),
+                child: const Text('SIGNUP'),
               ),
             ),
           ],
