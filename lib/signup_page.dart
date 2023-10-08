@@ -22,26 +22,28 @@ class SignUpPage extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           color: const Color.fromARGB(255, 127, 18, 163), // Desired color here
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'NEW ACCOUNT',
-                style: TextStyle(
-                  fontSize: 35 * fem,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF000000),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'NEW ACCOUNT',
+                  style: TextStyle(
+                    fontSize: 35 * fem,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFF000000),
+                  ),
                 ),
-              ),
-              SizedBox(height: 45 * fem),
-              _buildInputField('EMAIL', fem),
-              SizedBox(height: 35 * fem),
-              _buildInputField('USERNAME', fem),
-              SizedBox(height: 45 * fem),
-              _buildInputField('PASSWORD', fem),
-              SizedBox(height: 50 * fem),
-              _buildSignUpButton(fem),
-            ],
+                SizedBox(height: 45 * fem),
+                _buildInputField('EMAIL', fem),
+                SizedBox(height: 35 * fem),
+                _buildInputField('USERNAME', fem),
+                SizedBox(height: 45 * fem),
+                _buildInputField1('PASSWORD', fem),
+                SizedBox(height: 50 * fem),
+                _buildSignUpButton(fem),
+              ],
+            ),
           ),
         ),
       ),
@@ -53,6 +55,32 @@ class SignUpPage extends StatelessWidget {
       width: 320 * fem,
       height: 50 * fem,
       child: TextField(
+        style: TextStyle(
+          fontSize: 18 * fem,
+          fontWeight: FontWeight.w700,
+          color: const Color(0xFF000000),
+        ),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(
+            fontSize: 18 * fem,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFF000000),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFF000000)),
+          ),
+        ),
+      ),
+    );
+  }
+
+    Widget _buildInputField1(String label, double fem) {
+    return SizedBox(
+      width: 320 * fem,
+      height: 50 * fem,
+      child: TextField(
+        obscureText: true,
         style: TextStyle(
           fontSize: 18 * fem,
           fontWeight: FontWeight.w700,

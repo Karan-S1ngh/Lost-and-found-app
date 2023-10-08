@@ -15,10 +15,12 @@ class LoginInPage extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 182, 4, 242), // Desired background color here
+          color:
+              Color.fromARGB(255, 182, 4, 242), // Desired background color here
         ),
         child: Container(
-          padding: EdgeInsets.fromLTRB(0, screenHeight * 0.3, 0, screenHeight * 0.15),
+          padding: EdgeInsets.fromLTRB(
+              0, screenHeight * 0.3, 0, screenHeight * 0.15),
           width: double.infinity,
           height: double.infinity,
           color: const Color.fromARGB(255, 127, 18, 163), // Desired color here
@@ -28,34 +30,39 @@ class LoginInPage extends StatelessWidget {
               Text(
                 'WELCOME BACK',
                 style: TextStyle(
-                  fontSize: 32 * fem,
+                  fontSize: 35 * fem,
                   fontWeight: FontWeight.w700,
                   color: const Color(0xFF000000),
                 ),
               ),
-              SizedBox(height: 30 * fem), // Increased spacing
+              SizedBox(height: 50 * fem), 
               _buildInputField('EMAIL', fem),
-              SizedBox(height: 20 * fem), // Increased spacing
-              _buildInputField('PASSWORD', fem),
-              SizedBox(height: 30 * fem), // Increased spacing
+              SizedBox(height: 40 * fem), 
+              _buildInputField1('PASSWORD', fem),
+              SizedBox(height: 50 * fem), 
               GestureDetector(
                 onTap: () {
                   // Navigate to the password recovery page
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const PasswordRecoveryPage();
-                  }));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const PasswordRecoveryPage();
+                      },
+                    ),
+                  );
                 },
                 child: Text(
                   'Forgot Password?',
                   style: TextStyle(
-                    fontSize: 18 * fem,
+                    fontSize: 20 * fem,
                     fontWeight: FontWeight.w700,
                     color: const Color(0xFFFFFFFF),
                     decoration: TextDecoration.underline,
                   ),
                 ),
               ),
-              SizedBox(height: 30 * fem), // Increased spacing
+              SizedBox(height: 20 * fem),
               _buildLoginInButton(fem),
             ],
           ),
@@ -89,6 +96,32 @@ class LoginInPage extends StatelessWidget {
     );
   }
 
+      Widget _buildInputField1(String label, double fem) {
+    return SizedBox(
+      width: 320 * fem,
+      height: 50 * fem,
+      child: TextField(
+        obscureText: true,
+        style: TextStyle(
+          fontSize: 18 * fem,
+          fontWeight: FontWeight.w700,
+          color: const Color(0xFF000000),
+        ),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(
+            fontSize: 18 * fem,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFF000000),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFF000000)),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildLoginInButton(double fem) {
     return Container(
       width: 320 * fem,
@@ -102,7 +135,7 @@ class LoginInPage extends StatelessWidget {
           'LOG IN',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 22 * fem,
+            fontSize: 25 * fem,
             fontWeight: FontWeight.w700,
             color: const Color(0xFF000000),
           ),
