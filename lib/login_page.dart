@@ -18,8 +18,7 @@ class LoginInPage extends StatelessWidget {
           color: Color.fromARGB(255, 182, 4, 242), // Desired background color here
         ),
         child: Container(
-          padding:
-              EdgeInsets.fromLTRB(0, screenHeight * 0.2, 0, screenHeight * 0.1),
+          padding: EdgeInsets.fromLTRB(0, screenHeight * 0.3, 0, screenHeight * 0.15),
           width: double.infinity,
           height: double.infinity,
           color: const Color.fromARGB(255, 127, 18, 163), // Desired color here
@@ -29,16 +28,16 @@ class LoginInPage extends StatelessWidget {
               Text(
                 'WELCOME BACK',
                 style: TextStyle(
-                  fontSize: 35 * fem,
+                  fontSize: 32 * fem,
                   fontWeight: FontWeight.w700,
                   color: const Color(0xFF000000),
                 ),
               ),
-              SizedBox(height: 50 * fem),
+              SizedBox(height: 30 * fem), // Increased spacing
               _buildInputField('EMAIL', fem),
-              SizedBox(height: 40 * fem),
+              SizedBox(height: 20 * fem), // Increased spacing
               _buildInputField('PASSWORD', fem),
-              SizedBox(height: 50 * fem),
+              SizedBox(height: 30 * fem), // Increased spacing
               GestureDetector(
                 onTap: () {
                   // Navigate to the password recovery page
@@ -56,7 +55,7 @@ class LoginInPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 50 * fem),
+              SizedBox(height: 30 * fem), // Increased spacing
               _buildLoginInButton(fem),
             ],
           ),
