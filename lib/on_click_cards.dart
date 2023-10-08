@@ -45,7 +45,7 @@ class OnClickCards extends StatelessWidget {
                   height: 200,
                   width: 360,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF00b9f5),
+                    color: const Color.fromARGB(255, 182, 4, 242),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Image.network(imageUrl),
