@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'claim_page.dart';
 
 class OnClickLostCards extends StatelessWidget {
   final String username;
@@ -10,6 +11,66 @@ class OnClickLostCards extends StatelessWidget {
     required this.username,
     required this.title,
     required this.imageUrl,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OnClickCards(
+      username: username,
+      title: title,
+      imageUrl: imageUrl,
+      showClaimButton: false,
+      buttonText: 'Found?',
+      onButtonPressed: () {
+        // Handle "Found?" logic here
+      },
+    );
+  }
+}
+
+class OnClickFoundCards extends StatelessWidget {
+  final String username;
+  final String title;
+  final String imageUrl;
+
+  const OnClickFoundCards({
+    Key? key,
+    required this.username,
+    required this.title,
+    required this.imageUrl,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OnClickCards(
+      username: username,
+      title: title,
+      imageUrl: imageUrl,
+      showClaimButton: true,
+      buttonText: 'Claim',
+      onButtonPressed: () {
+        // Handle claim logic here
+      },
+    );
+  }
+}
+
+class OnClickCards extends StatelessWidget {
+  final String username;
+  final String title;
+  final String imageUrl;
+  final bool showClaimButton;
+  final String buttonText;
+  final VoidCallback onButtonPressed;
+
+  const OnClickCards({
+    Key? key,
+    required this.username,
+    required this.title,
+    required this.imageUrl,
+    required this.showClaimButton,
+    required this.buttonText,
+    required this.onButtonPressed,
   }) : super(key: key);
 
   @override
@@ -66,16 +127,26 @@ class OnClickLostCards extends StatelessWidget {
                 style: const TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 20),
-              // Claim button at the bottom right corner
+              // Conditionally show claim or found button
               Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Handle claim logic here
+                      if (showClaimButton) {
+                        // Navigate to the questionnaire page when "Claim" button is pressed
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ClaimQuestionnairePage(),
+                          ),
+                        );
+                      } else {
+                        // Handle "Found?" button logic here
+                      }
                     },
-                    child: const Text('Claim'),
+                    child: Text(buttonText),
                   ),
                 ),
               ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/on_click_foundcards.dart';
+import 'package:test/on_click_cards.dart';
 
 class FoundInformCards extends StatelessWidget {
   final String username;

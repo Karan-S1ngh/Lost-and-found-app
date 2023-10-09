@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/on_click_lostcards.dart';
+import 'package:test/on_click_cards.dart';
 
 class LostInformCards extends StatelessWidget {
   final String username;
