@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'on_click_cards.dart';
+import 'package:test/on_click_foundcards.dart';
 
 class FoundInformCards extends StatelessWidget {
   final String username;
@@ -19,10 +19,16 @@ class FoundInformCards extends StatelessWidget {
       children: <Widget>[
         InkWell(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return OnClickCards(
-                  username: username, title: title, imageUrl: imageUrl);
-            }));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OnClickFoundCards(
+                  username: username,
+                  title: title,
+                  imageUrl: imageUrl,
+                ),
+              ),
+            );
           },
           child: Stack(
             clipBehavior: Clip.none,
@@ -32,7 +38,7 @@ class FoundInformCards extends StatelessWidget {
                 height: 220,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color:const Color.fromARGB(255, 182, 4, 242),
+                  color: const Color.fromARGB(255, 182, 4, 242),
                   boxShadow: const [
                     BoxShadow(
                       color: Color(0x4D000000),

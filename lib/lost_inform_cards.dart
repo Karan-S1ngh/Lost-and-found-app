@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/on_click_cards.dart';
+import 'package:test/on_click_lostcards.dart';
 
 class LostInformCards extends StatelessWidget {
   final String username;
@@ -22,8 +22,12 @@ class LostInformCards extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => OnClickCards(
-                      username: username, title: title, imageUrl: imageUrl)),
+                builder: (context) => OnClickLostCards(
+                  username: username,
+                  title: title,
+                  imageUrl: imageUrl,
+                ),
+              ),
             );
           },
           child: Stack(

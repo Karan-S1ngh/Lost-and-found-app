@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class OnClickCards extends StatelessWidget {
+class OnClickLostCards extends StatelessWidget {
   final String username;
   final String title;
   final String imageUrl;
 
-  const OnClickCards({
+  const OnClickLostCards({
     Key? key,
     required this.username,
     required this.title,
@@ -64,6 +64,20 @@ class OnClickCards extends StatelessWidget {
               Text(
                 'Username: @$username',
                 style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 20),
+              // Claim button at the bottom right corner
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Handle claim logic here
+                    },
+                    child: const Text('Claim'),
+                  ),
+                ),
               ),
             ],
           ),

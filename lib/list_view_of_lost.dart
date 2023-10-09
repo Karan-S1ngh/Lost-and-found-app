@@ -12,25 +12,29 @@ class ListViewOfLost extends StatelessWidget {
         LostInformCards(
           username: "@Username1",
           title: "Title of Lost Item 1",
-          imageUrl: "https://example.com/lost_image1.jpg",
+          imageUrl:
+              "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
+              
         ),
         LostInformCards(
           username: "@Username2",
           title: "Title of Lost Item 2",
-          imageUrl: "https://example.com/lost_image2.jpg",
+          imageUrl:
+              "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
         ),
         LostInformCards(
           username: "@Username3",
           title: "Title of Lost Item 3",
-          imageUrl: "https://example.com/lost_image3.jpg",
+          imageUrl:
+              "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
         ),
         LostInformCards(
           username: "@Username4",
           title: "Title of Lost Item 4",
-          imageUrl: "https://example.com/lost_image4.jpg",
+          imageUrl:
+              "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
         ),
       ],
     );
   }
 }
-
