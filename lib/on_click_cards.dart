@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'claim_page.dart';
+import 'found_page.dart';
 
 class OnClickLostCards extends StatelessWidget {
   final String username;
@@ -20,9 +21,8 @@ class OnClickLostCards extends StatelessWidget {
       title: title,
       imageUrl: imageUrl,
       showClaimButton: false,
-      buttonText: 'Found?',
-      onButtonPressed: () {
-        // Handle "Found?" logic here
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const FoundPage()));
       },
     );
   }
@@ -47,9 +47,8 @@ class OnClickFoundCards extends StatelessWidget {
       title: title,
       imageUrl: imageUrl,
       showClaimButton: true,
-      buttonText: 'Claim',
-      onButtonPressed: () {
-        // Handle claim logic here
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const ClaimPage()));
       },
     );
   }
@@ -58,23 +57,23 @@ class OnClickFoundCards extends StatelessWidget {
 class OnClickCards extends StatelessWidget {
   final String username;
   final String title;
-  final String? imageUrl; // Make imageUrl nullable for optional input
+  final String? imageUrl;
   final bool showClaimButton;
-  final String buttonText;
-  final VoidCallback onButtonPressed;
+  final VoidCallback onPressed;
 
   const OnClickCards({
     Key? key,
     required this.username,
     required this.title,
-    this.imageUrl, // Make imageUrl nullable for optional input
+    this.imageUrl,
     required this.showClaimButton,
-    required this.buttonText,
-    required this.onButtonPressed,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String buttonText = showClaimButton ? 'Claim' : 'Found?';
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -146,19 +145,10 @@ class OnClickCards extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16),
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (showClaimButton) {
-                        // Navigate to the questionnaire page when "Claim" button is pressed
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ClaimQuestionnairePage(),
-                          ),
-                        );
-                      } else {
-                        // Handle "Found?" button logic here
-                      }
-                    },
+                    onPressed: onPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+                    ),
                     child: Text(buttonText),
                   ),
                 ),

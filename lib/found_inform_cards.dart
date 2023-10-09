@@ -22,7 +22,7 @@ class FoundInformCards extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => OnClickLostCards(
+                builder: (context) => OnClickFoundCards(
                   username: username,
                   title: title,
                   imageUrl: imageUrl ?? "", // Use empty string if imageUrl is null

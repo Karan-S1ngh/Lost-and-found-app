@@ -1,8 +1,34 @@
 import 'package:flutter/material.dart';
-import 'password_recovery_page.dart'; // Import your password recovery page file
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:test/home_page.dart';
+import 'package:logger/logger.dart';
+import 'password_recovery_page.dart';
 
 class LoginInPage extends StatelessWidget {
-  const LoginInPage({super.key});
+  LoginInPage({Key? key}) : super(key: key);
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final logger = Logger();
+
+  Future<void> _handleLogin(BuildContext context) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
+      if (userCredential.user != null) {
+        // User logged in successfully, navigate to home page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      }
+    } catch (e) {
+      // Handle login errors (e.g., invalid credentials)
+      logger.d("Error during login: $e");
+      // You can show an error message to the user here if you want
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +41,14 @@ class LoginInPage extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color:
-              Color.fromARGB(255, 182, 4, 242), // Desired background color here
+          color: Color.fromARGB(255, 182, 4, 242),
         ),
         child: Container(
           padding: EdgeInsets.fromLTRB(
               0, screenHeight * 0.3, 0, screenHeight * 0.15),
           width: double.infinity,
           height: double.infinity,
-          color: const Color.fromARGB(255, 127, 18, 163), // Desired color here
+          color: const Color.fromARGB(255, 127, 18, 163),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,14 +61,13 @@ class LoginInPage extends StatelessWidget {
                     color: const Color(0xFF000000),
                   ),
                 ),
-                SizedBox(height: 50 * fem), 
+                SizedBox(height: 50 * fem),
                 _buildInputField('EMAIL', fem),
-                SizedBox(height: 40 * fem), 
-                _buildInputField1('PASSWORD', fem),
-                SizedBox(height: 50 * fem), 
+                SizedBox(height: 40 * fem),
+                _buildInputField('PASSWORD', fem, isPassword: true),
+                SizedBox(height: 50 * fem),
                 GestureDetector(
                   onTap: () {
-                    // Navigate to the password recovery page
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -64,7 +88,7 @@ class LoginInPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20 * fem),
-                _buildLoginInButton(fem),
+                _buildLoginInButton(fem, context),
               ],
             ),
           ),
@@ -73,11 +97,12 @@ class LoginInPage extends StatelessWidget {
     );
   }
 
-  Widget _buildInputField(String label, double fem) {
-    return SizedBox(
-      width: 320 * fem,
-      height: 50 * fem,
+  Widget _buildInputField(String label, double fem, {bool isPassword = false}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 40 * fem),
       child: TextField(
+        controller: isPassword ? _passwordController : _emailController,
+        obscureText: isPassword,
         style: TextStyle(
           fontSize: 18 * fem,
           fontWeight: FontWeight.w700,
@@ -98,33 +123,7 @@ class LoginInPage extends StatelessWidget {
     );
   }
 
-      Widget _buildInputField1(String label, double fem) {
-    return SizedBox(
-      width: 320 * fem,
-      height: 50 * fem,
-      child: TextField(
-        obscureText: true,
-        style: TextStyle(
-          fontSize: 18 * fem,
-          fontWeight: FontWeight.w700,
-          color: const Color(0xFF000000),
-        ),
-        decoration: InputDecoration(
-          labelText: label,
-          labelStyle: TextStyle(
-            fontSize: 18 * fem,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFF000000),
-          ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Color(0xFF000000)),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLoginInButton(double fem) {
+  Widget _buildLoginInButton(double fem, BuildContext context) {
     return Container(
       width: 320 * fem,
       height: 60 * fem,
@@ -132,7 +131,10 @@ class LoginInPage extends StatelessWidget {
         color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(30 * fem),
       ),
-      child: Center(
+      child: ElevatedButton(
+        onPressed: () {
+          _handleLogin(context);
+        },
         child: Text(
           'LOG IN',
           textAlign: TextAlign.center,
@@ -141,6 +143,10 @@ class LoginInPage extends StatelessWidget {
             fontWeight: FontWeight.w700,
             color: const Color(0xFF000000),
           ),
+        ),
+        style: ElevatedButton.styleFrom(
+          primary: Colors.transparent,
+          shadowColor: Colors.transparent,
         ),
       ),
     );

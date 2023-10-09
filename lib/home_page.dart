@@ -6,6 +6,8 @@ import 'on_click_tab.dart';
 import 'about_us_page.dart';
 import 'privacy_policy_page.dart';
 import 'help_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'first_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,6 +18,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedBarIndex = 0;
+
+  // Function to sign out the user
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      // Navigate back to the login page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => FirstPage()),
+      );
+    } catch (e) {
+      print("Error during sign out: $e");
+      // Handle sign-out errors here
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +73,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.logout), // Sign-out icon
+                    onPressed: () => _signOut(context),
+                  ),
+                ],
               )
             : null, // Hides app bar for About Us, Privacy Policy, and Help pages
         body: body,
