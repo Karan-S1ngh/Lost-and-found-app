@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
           animationDuration: const Duration(milliseconds: 150),
-          barStyle: BarStyle(fontSize: 13.0, iconSize: 20.0),
+          barStyle: BarStyle(fontSize: 13.0, iconSize: 30.0),
           onBarTap: (index) {
             setState(
               () {

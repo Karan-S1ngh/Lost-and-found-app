@@ -60,24 +60,11 @@ class AnimatedBottomBar extends StatelessWidget {
         onTap: () => onBarTap(index),
         child: SizedBox(
           height: 70,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.iconData,
-                  size: barStyle.iconSize,
-                  color: item.color,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  item.text,
-                  style: TextStyle(
-                    fontSize: barStyle.fontSize,
-                    color: item.color,
-                  ),
-                ),
-              ],
+          child: Center(
+            child: Icon(
+              item.iconData,
+              size: barStyle.iconSize,
+              color: item.color,
             ),
           ),
         ),

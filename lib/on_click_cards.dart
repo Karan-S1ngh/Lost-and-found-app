@@ -58,7 +58,7 @@ class OnClickFoundCards extends StatelessWidget {
 class OnClickCards extends StatelessWidget {
   final String username;
   final String title;
-  final String imageUrl;
+  final String? imageUrl; // Make imageUrl nullable for optional input
   final bool showClaimButton;
   final String buttonText;
   final VoidCallback onButtonPressed;
@@ -67,7 +67,7 @@ class OnClickCards extends StatelessWidget {
     Key? key,
     required this.username,
     required this.title,
-    required this.imageUrl,
+    this.imageUrl, // Make imageUrl nullable for optional input
     required this.showClaimButton,
     required this.buttonText,
     required this.onButtonPressed,
@@ -109,7 +109,20 @@ class OnClickCards extends StatelessWidget {
                     color: const Color.fromARGB(255, 182, 4, 242),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Image.network(imageUrl),
+                  child: imageUrl != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            imageUrl!,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : const Center(
+                          child: Text(
+                            'No Image Available',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
                 ),
               ),
               const SizedBox(
@@ -139,7 +152,7 @@ class OnClickCards extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ClaimQuestionnairePage(),
+                            builder: (context) => const ClaimQuestionnairePage(),
                           ),
                         );
                       } else {
