@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-class OnClickFAB extends StatefulWidget {
-  const OnClickFAB({Key? key}) : super(key: key);
+class OnClickTAB extends StatefulWidget {
+  const OnClickTAB({Key? key}) : super(key: key);
 
   @override
-  State<OnClickFAB> createState() => _OnClickFABState();
+  State<OnClickTAB> createState() => _OnClickTABState();
 }
 
-class _OnClickFABState extends State<OnClickFAB> {
+class _OnClickTABState extends State<OnClickTAB> {
   late File _image;
 
   @override
@@ -21,11 +21,13 @@ class _OnClickFABState extends State<OnClickFAB> {
   Future getImage() async {
     var image = await ImagePicker().pickImage(source: ImageSource.camera);
 
-    setState(() {
-      if (image != null) {
-        _image = File(image.path);
-      }
-    });
+    setState(
+      () {
+        if (image != null) {
+          _image = File(image.path);
+        }
+      },
+    );
   }
 
   String title = "";
@@ -36,7 +38,7 @@ class _OnClickFABState extends State<OnClickFAB> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: const Color.fromARGB(255, 182, 4, 242),
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,

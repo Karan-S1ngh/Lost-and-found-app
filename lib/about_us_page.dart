@@ -8,13 +8,15 @@ class AboutUsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 182, 4, 242),
-        title: const Center(
-          child: Text(
-            'About Us',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 23,
+        title: const SingleChildScrollView(
+          child: Center(
+            child: Text(
+              'About Us',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 23,
+              ),
             ),
           ),
         ),
