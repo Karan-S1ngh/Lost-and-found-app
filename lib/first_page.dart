@@ -1,34 +1,90 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // Import your login page file here
-import 'signup_page.dart'; // Import your signup page file here
+import 'login_page.dart';
+import 'signup_page.dart';
 
 class FirstPage extends StatelessWidget {
-  const FirstPage({super.key});
+    const FirstPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF301934),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-              child: const Text('LOGIN'),
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              constraints: const BoxConstraints(
+                maxWidth: 300,
+              ),
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: const TextSpan(
+                  text: 'CAMPUS LOST AND FOUND APP\n',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: ' “Find What’s Yours Campus Is Wide”  ',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignUpPage()),
-                );
-              },
-              child: const Text('SIGN UP'),
+            const Icon(
+              Icons.search_rounded,
+              size: 200,
+              color: Colors.white,
+            ),
+            const SizedBox(height: 30),
+            SizedBox(
+              width: 122,
+              height: 42,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  LoginInPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFD9D9D9),
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
+                child: const Text('LOGIN'),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 122,
+              height: 42,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignUpPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFD9D9D9),
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: const Text('SIGNUP'),
+              ),
             ),
           ],
         ),

@@ -4,13 +4,13 @@ import 'package:test/on_click_cards.dart';
 class LostInformCards extends StatelessWidget {
   final String username;
   final String title;
-  final String imageUrl;
+  final String? imageUrl; // Made imageUrl nullable for optional input
 
   const LostInformCards({
     Key? key,
     required this.username,
     required this.title,
-    required this.imageUrl,
+    this.imageUrl,
   }) : super(key: key);
 
   @override
@@ -22,8 +22,12 @@ class LostInformCards extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => OnClickCards(
-                      username: username, title: title, imageUrl: imageUrl)),
+                builder: (context) => OnClickLostCards(
+                  username: username,
+                  title: title,
+                  imageUrl: imageUrl ?? "", // Use empty string if imageUrl is null
+                ),
+              ),
             );
           },
           child: Stack(
@@ -34,7 +38,7 @@ class LostInformCards extends StatelessWidget {
                 height: 220,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: const Color(0xFF00b9f5),
+                  color: const Color.fromARGB(255, 182, 4, 242),
                   boxShadow: const [
                     BoxShadow(
                       color: Color(0x4D000000),
@@ -44,6 +48,20 @@ class LostInformCards extends StatelessWidget {
                     ),
                   ],
                 ),
+                child: imageUrl != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          imageUrl!,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : const Center(
+                        child: Text(
+                          'No Image Available',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
               ),
               Positioned(
                 top: 140,
@@ -89,26 +107,6 @@ class LostInformCards extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-              ),
-              Positioned(
-                left: -5.0,
-                child: Container(
-                  height: 140.0,
-                  width: 310.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x4D000000),
-                        offset: Offset(0.0, 5.0),
-                        blurRadius: 20.0,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                  ),
-                  child: Image.network(imageUrl),
                 ),
               ),
             ],

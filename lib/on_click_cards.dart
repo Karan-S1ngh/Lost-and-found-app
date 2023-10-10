@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'claim_page.dart';
+import 'found_page.dart';
 
-class OnClickCards extends StatelessWidget {
+class OnClickLostCards extends StatelessWidget {
   final String username;
   final String title;
   final String imageUrl;
 
-  const OnClickCards({
+  const OnClickLostCards({
     Key? key,
     required this.username,
     required this.title,
@@ -14,10 +16,68 @@ class OnClickCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return OnClickCards(
+      username: username,
+      title: title,
+      imageUrl: imageUrl,
+      showClaimButton: false,
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const FoundPage()));
+      },
+    );
+  }
+}
+
+class OnClickFoundCards extends StatelessWidget {
+  final String username;
+  final String title;
+  final String imageUrl;
+
+  const OnClickFoundCards({
+    Key? key,
+    required this.username,
+    required this.title,
+    required this.imageUrl,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OnClickCards(
+      username: username,
+      title: title,
+      imageUrl: imageUrl,
+      showClaimButton: true,
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const ClaimPage()));
+      },
+    );
+  }
+}
+
+class OnClickCards extends StatelessWidget {
+  final String username;
+  final String title;
+  final String? imageUrl;
+  final bool showClaimButton;
+  final VoidCallback onPressed;
+
+  const OnClickCards({
+    Key? key,
+    required this.username,
+    required this.title,
+    this.imageUrl,
+    required this.showClaimButton,
+    required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    String buttonText = showClaimButton ? 'Claim' : 'Found?';
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF00b9f5),
+        backgroundColor: const Color.fromARGB(255, 182, 4, 242),
         title: const Align(
           alignment: Alignment.center,
           child: Text(
@@ -45,10 +105,23 @@ class OnClickCards extends StatelessWidget {
                   height: 200,
                   width: 360,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF00b9f5),
+                    color: const Color.fromARGB(255, 182, 4, 242),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Image.network(imageUrl),
+                  child: imageUrl != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            imageUrl!,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : const Center(
+                          child: Text(
+                            'No Image Available',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
                 ),
               ),
               const SizedBox(
@@ -64,6 +137,21 @@ class OnClickCards extends StatelessWidget {
               Text(
                 'Username: @$username',
                 style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 20),
+              // Conditionally show claim or found button
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: ElevatedButton(
+                    onPressed: onPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+                    ),
+                    child: Text(buttonText),
+                  ),
+                ),
               ),
             ],
           ),

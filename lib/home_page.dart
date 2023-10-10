@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:test/list_view_of_found.dart';
 import 'package:test/list_view_of_lost.dart';
 import 'package:test/animated_bottom_bar.dart';
-import 'on_click_fab.dart';
+import 'on_click_tab.dart';
+import 'about_us_page.dart';
+import 'privacy_policy_page.dart';
+import 'help_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'first_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,56 +19,128 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedBarIndex = 0;
 
+  // Function to sign out the user
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      // Navigate back to the login page
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const FirstPage()),
+      );
+    } catch (e) {
+      // ignore: avoid_print
+      print("Error during sign out: $e");
+      // Handle sign-out errors here
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF00b9f5),
-        title: Align(
-          alignment: Alignment.center,
-          child: Text(
-            selectedBarIndex == 0 ? 'Lost Items' : 'Found Items',
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 23,
-            ),
+    String title = '';
+    if (selectedBarIndex == 0) {
+      title = 'Lost Items';
+    } else if (selectedBarIndex == 1) {
+      title = 'Found Items';
+    }
+
+    Widget body;
+    if (selectedBarIndex == 0) {
+      body = const ListViewOfLost();
+    } else if (selectedBarIndex == 1) {
+      body = const ListViewOfFound();
+    } else if (selectedBarIndex == 2) {
+      body = const AboutUsPage();
+    } else if (selectedBarIndex == 3) {
+      body = const PrivacyPolicyPage();
+    } else if (selectedBarIndex == 4) {
+      body = const HelpPage();
+    } else {
+      body = const Center(child: Text('Invalid Tab Index'));
+    }
+
+    return SafeArea(
+      child: Scaffold(
+        appBar: selectedBarIndex <= 1
+            ? AppBar(
+                backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+                title: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.logout), // Sign-out icon
+                    onPressed: () => _signOut(context),
+                  ),
+                ],
+              )
+            : null, // Hides app bar for About Us, Privacy Policy, and Help pages
+        body: body,
+        floatingActionButton: SafeArea(
+          child: FloatingActionButton.extended(
+            backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+            foregroundColor: Colors.white,
+            icon: const Icon(Icons.add),
+            label: const Text('Add Item'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const OnClickTAB();
+                  },
+                ),
+              );
+            },
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF00b9f5),
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const OnClickFAB();
-          }));
-        },
-      ),
-      body: selectedBarIndex == 0
-          ? const ListViewOfLost()
-          : const ListViewOfFound(),
-      bottomNavigationBar: AnimatedBottomBar(
-        barItems: [
-          BarItem(
-            text: "Lost",
-            iconData: Icons.blur_off,
-            color: const Color.fromARGB(0, 137, 9, 137),
-          ),
-          BarItem(
-            text: "Found",
-            iconData: Icons.blur_on,
-            color: const Color(0xFF012b72),
-          ),
-        ],
-        animationDuration: const Duration(milliseconds: 150),
-        barStyle: BarStyle(fontSize: 23.0, iconSize: 30.0),
-        onBarTap: (index) {
-          setState(() {
-            selectedBarIndex = index;
-          });
-        },
+
+        bottomNavigationBar: AnimatedBottomBar(
+          barItems: [
+            BarItem(
+              text: "Lost",
+              iconData: Icons.search_off,
+              color: const Color.fromARGB(255, 182, 4, 242),
+            ),
+            BarItem(
+              text: "Found",
+              iconData: Icons.search,
+              color: const Color.fromARGB(255, 182, 4, 242),
+            ),
+            BarItem(
+              text: "About Us",
+              iconData: Icons.info,
+              color: const Color.fromARGB(255, 182, 4, 242),
+            ),
+            BarItem(
+              text: "Privacy Policy",
+              iconData: Icons.lock,
+              color: const Color.fromARGB(255, 182, 4, 242),
+            ),
+            BarItem(
+              text: "Help",
+              iconData: Icons.help,
+              color: const Color.fromARGB(255, 182, 4, 242),
+            ),
+          ],
+          animationDuration: const Duration(milliseconds: 150),
+          barStyle: BarStyle(fontSize: 13.0, iconSize: 30.0),
+          onBarTap: (index) {
+            setState(
+              () {
+                selectedBarIndex = index;
+              },
+            );
+          },
+        ),
       ),
     );
   }
