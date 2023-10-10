@@ -61,10 +61,32 @@ class AnimatedBottomBar extends StatelessWidget {
         child: SizedBox(
           height: 70,
           child: Center(
-            child: Icon(
-              item.iconData,
-              size: barStyle.iconSize,
-              color: item.color,
+            child: Padding(
+              padding: EdgeInsets.only(
+                bottom: item.text == "Privacy Policy" ? 8 : 5,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    item.iconData,
+                    size: barStyle.iconSize,
+                    color: item.color,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      item.text,
+                      style: TextStyle(
+                        fontSize: barStyle.fontSize,
+                        fontWeight: FontWeight.w600,
+                        color: item.color,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
