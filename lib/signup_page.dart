@@ -24,6 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => LoginInPage()),

@@ -18,6 +18,7 @@ class LoginInPage extends StatelessWidget {
               email: _emailController.text, password: _passwordController.text);
       if (userCredential.user != null) {
         // User logged in successfully, navigate to home page
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
@@ -135,6 +136,7 @@ class LoginInPage extends StatelessWidget {
         onPressed: () {
           _handleLogin(context);
         },
+        // ignore: sort_child_properties_last
         child: Text(
           'LOG IN',
           textAlign: TextAlign.center,
@@ -145,7 +147,7 @@ class LoginInPage extends StatelessWidget {
           ),
         ),
         style: ElevatedButton.styleFrom(
-          primary: Colors.transparent,
+          backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
         ),
       ),

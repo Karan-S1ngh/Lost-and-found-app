@@ -24,11 +24,13 @@ class _HomePageState extends State<HomePage> {
     try {
       await FirebaseAuth.instance.signOut();
       // Navigate back to the login page
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => FirstPage()),
+        MaterialPageRoute(builder: (context) => const FirstPage()),
       );
     } catch (e) {
+      // ignore: avoid_print
       print("Error during sign out: $e");
       // Handle sign-out errors here
     }
