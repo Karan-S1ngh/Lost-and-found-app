@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:test/login_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   @override
-   State<SignUpPage> createState() => _SignUpPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
@@ -23,6 +24,10 @@ class _SignUpPageState extends State<SignUpPage> {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginInPage()),
+      );
 
       // User created successfully, you can handle the navigation or additional tasks here.
     } on FirebaseAuthException catch (e) {
@@ -38,9 +43,10 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
- void _showSnackBar(String message) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
-}
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +96,9 @@ class _SignUpPageState extends State<SignUpPage> {
       width: 320,
       height: 50,
       child: TextField(
-        controller: isPassword ? _passwordController : (label == 'EMAIL' ? _emailController : _usernameController),
+        controller: isPassword
+            ? _passwordController
+            : (label == 'EMAIL' ? _emailController : _usernameController),
         obscureText: isPassword,
         style: const TextStyle(
           fontSize: 18,
