@@ -63,7 +63,7 @@ class AnimatedBottomBar extends StatelessWidget {
           child: Center(
             child: Padding(
               padding: EdgeInsets.only(
-                bottom: item.text == "Privacy Policy" ? 8 : 5,
+                bottom: item.text == "Privacy" ? 8 : 5,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
