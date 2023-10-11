@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
               color: const Color.fromARGB(255, 182, 4, 242),
             ),
             BarItem(
-              text: "Privacy Policy",
+              text: "Privacy",
               iconData: Icons.lock,
               color: const Color.fromARGB(255, 182, 4, 242),
             ),
