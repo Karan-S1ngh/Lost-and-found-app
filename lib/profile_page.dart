@@ -34,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 232, 176, 250),
+        backgroundColor: const Color.fromARGB(255, 232, 176, 250),
         title: const Text(
           'Profile',
           style: TextStyle(
@@ -68,12 +68,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 radius: 40,
                 backgroundImage:
                     (profilepic != null) ? FileImage(profilepic!) : null,
-                backgroundColor: Color.fromARGB(255, 247, 196, 247),
+                backgroundColor: const Color.fromARGB(255, 247, 196, 247),
               ),
             ),
             const Text(
               'Welcome User!', // Display user's name here
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style:  TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -88,8 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () => _signOut(context),
               child: const Text('Sign Out'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(
-                    255, 255, 17, 0), // Set sign-out button color to red
+                backgroundColor: const Color.fromARGB(255, 255, 17, 0), // Set sign-out button color to red
               ),
             ),
           ],

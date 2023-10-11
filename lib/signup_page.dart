@@ -27,7 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => FirstPage()),
+        MaterialPageRoute(builder: (context) => const FirstPage()),
       );
 
       // User created successfully, you can handle the navigation or additional tasks here.
@@ -63,7 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
           padding: const EdgeInsets.fromLTRB(0, 100, 0, 100),
           width: double.infinity,
           height: double.infinity,
-          color: Color.fromARGB(255, 237, 206, 247),
+          color: const Color.fromARGB(255, 237, 206, 247),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

@@ -8,7 +8,7 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 89, 25, 100),
+      backgroundColor: const Color.fromARGB(255, 89, 25, 100),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
