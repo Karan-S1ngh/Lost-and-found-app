@@ -22,7 +22,8 @@ class OnClickLostCards extends StatelessWidget {
       imageUrl: imageUrl,
       showClaimButton: false,
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const FoundPage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const FoundPage()));
       },
     );
   }
@@ -48,7 +49,8 @@ class OnClickFoundCards extends StatelessWidget {
       imageUrl: imageUrl,
       showClaimButton: true,
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const ClaimPage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ClaimPage()));
       },
     );
   }

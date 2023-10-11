@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:test/login_page.dart';
+import 'package:test/first_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginInPage()),
+        MaterialPageRoute(builder: (context) => FirstPage()),
       );
 
       // User created successfully, you can handle the navigation or additional tasks here.
@@ -57,13 +57,13 @@ class _SignUpPageState extends State<SignUpPage> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 182, 4, 242),
+          color: Color.fromARGB(255, 122, 86, 134),
         ),
         child: Container(
           padding: const EdgeInsets.fromLTRB(0, 100, 0, 100),
           width: double.infinity,
           height: double.infinity,
-          color: const Color.fromARGB(255, 127, 18, 163),
+          color: Color.fromARGB(255, 237, 206, 247),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

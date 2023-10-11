@@ -64,8 +64,7 @@ class _HomePageState extends State<HomePage> {
                       // Handle profile button tap
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfilePage()),
+                        MaterialPageRoute(builder: (context) => ProfilePage()),
                       );
                     },
                   ),

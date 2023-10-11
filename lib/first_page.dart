@@ -3,12 +3,12 @@ import 'login_page.dart';
 import 'signup_page.dart';
 
 class FirstPage extends StatelessWidget {
-    const FirstPage({super.key});
+  const FirstPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF301934),
+      backgroundColor: Color.fromARGB(255, 89, 25, 100),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +52,7 @@ class FirstPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  LoginInPage()),
+                    MaterialPageRoute(builder: (context) => LoginInPage()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
