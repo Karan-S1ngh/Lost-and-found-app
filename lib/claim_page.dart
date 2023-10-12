@@ -6,6 +6,7 @@ class ClaimPage extends StatefulWidget {
   const ClaimPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ClaimPageState createState() => _ClaimPageState();
 }
 
@@ -21,7 +22,7 @@ class _ClaimPageState extends State<ClaimPage> {
   final TextEditingController claimedItemLocationController =
       TextEditingController();
 
-  final DatabaseReference _database = FirebaseDatabase.instance.reference();
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
   @override
   Widget build(BuildContext context) {
@@ -93,14 +94,14 @@ class _ClaimPageState extends State<ClaimPage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("Claimed Item Submitted"),
-                        content: Text("Your claimed item details have been submitted successfully!"),
+                        title: const Text("Claimed Item Submitted"),
+                        content: const Text("Your claimed item details have been submitted successfully!"),
                         actions: [
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: Text("OK"),
+                            child: const Text("OK"),
                           ),
                         ],
                       );

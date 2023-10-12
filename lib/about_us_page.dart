@@ -22,7 +22,8 @@ class AboutUsPage extends StatelessWidget {
         ),
       ),
       body: const Center(
-        child: Text('About Us Content Goes Here'),
+        child: Text(
+            "Welcome To the ultimate lost and found solution. We're on a mission to simplify the process of reuniting people with their lost belongings. With our user-friendly app, reporting lost items takes seconds, and finding what you've lost is just as easy. We connect responsible finders with grateful owners, ensuring a smooth return process. Your privacy is our priority, and your personal information is secure. Join our growing community of caring individuals and experience the satisfaction of reuniting lost items with their rightful owners."),
       ),
     );
   }
