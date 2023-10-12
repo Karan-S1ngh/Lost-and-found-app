@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'first_page.dart';
@@ -9,6 +11,7 @@ class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProfilePageState createState() => _ProfilePageState();
 }
 
@@ -20,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
     try {
       await FirebaseAuth.instance.signOut();
       // Navigate back to the login page
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const FirstPage()),
@@ -86,6 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => _signOut(context),
+              // ignore: sort_child_properties_last
               child: const Text('Sign Out'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 255, 17, 0), // Set sign-out button color to red

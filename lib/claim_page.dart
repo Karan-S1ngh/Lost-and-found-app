@@ -1,11 +1,11 @@
-//Claimed Item Page:
 import 'package:flutter/material.dart';
+//import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class ClaimPage extends StatefulWidget {
-  const ClaimPage({super.key});
+  const ClaimPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _ClaimPageState createState() => _ClaimPageState();
 }
 
@@ -20,6 +20,8 @@ class _ClaimPageState extends State<ClaimPage> {
       TextEditingController();
   final TextEditingController claimedItemLocationController =
       TextEditingController();
+
+  final DatabaseReference _database = FirebaseDatabase.instance.reference();
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +69,43 @@ class _ClaimPageState extends State<ClaimPage> {
               const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
-                  // Implement your logic for handling claimed items here
-                  // You can access the text entered in the controllers
+                  // Get the data from the form controllers
+                  String itemDescription = claimedItemDescriptionController.text;
+                  String identifyingMark = claimedItemMarkController.text;
+                  String wallpaperImage = claimedItemWallpaperController.text;
+                  String time = claimedItemTimeController.text;
+                  String location = claimedItemLocationController.text;
+
+                  // Create a map to store the claimed item details
+                  Map<String, dynamic> claimedItemData = {
+                    'itemDescription': itemDescription,
+                    'identifyingMark': identifyingMark,
+                    'wallpaperImage': wallpaperImage,
+                    'time': time,
+                    'location': location,
+                  };
+
+                  // Send the claimed item data to Firebase Realtime Database
+                  _database.child("claimedItems").push().set(claimedItemData);
+
+                  // Provide feedback to the user
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Claimed Item Submitted"),
+                        content: Text("Your claimed item details have been submitted successfully!"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 182, 4, 242),
