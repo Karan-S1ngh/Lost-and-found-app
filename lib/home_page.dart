@@ -6,6 +6,8 @@ import 'on_click_tab.dart';
 import 'about_us_page.dart';
 import 'privacy_policy_page.dart';
 import 'help_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'first_page.dart';
 import 'profile_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -64,7 +66,8 @@ class _HomePageState extends State<HomePage> {
                       // Handle profile button tap
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ProfilePage()),
+                        MaterialPageRoute(
+                            builder: (context) => const ProfilePage()),
                       );
                     },
                   ),
