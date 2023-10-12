@@ -107,7 +107,7 @@ class _FoundPageState extends State<FoundPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 182, 4, 242),
                 ),
-                child: const Text('Submit Claimed Item'),
+                child: const Text('Submit Found Item'),
               ),
             ],
           ),
