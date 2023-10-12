@@ -20,6 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _handleSignUp() async {
     String email = _emailController.text.trim();
+    // ignore: unused_local_variable
     String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
 
