@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:test/firebase_options.dart';
@@ -13,21 +12,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  //FirebaseFirestore firestore = FirebaseFirestore.instance;
-  /*DocumentSnapshot snapshot = await FirebaseFirestore.instance
-      .collection("users")
-      .doc("amrutapawar004@gmail.com")
-      .get();
-  log(snapshot.data());*/
-
-//to add a new documentation
-  /* Map<String, dynamic> newUserData = {
-    "name": "Drishya",
-    "email": "drishya258@gmail.com",
-  };
-  await firestore.collection("users").doc("drishya45@gmail.com").set(newUserData);
-  log("New user saved!");*/
-
   runApp(const MyApp());
 }
 
