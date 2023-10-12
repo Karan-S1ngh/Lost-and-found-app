@@ -25,7 +25,8 @@ class LostInformCards extends StatelessWidget {
                 builder: (context) => OnClickLostCards(
                   username: username,
                   title: title,
-                  imageUrl: imageUrl ?? "", // Use empty string if imageUrl is null
+                  imageUrl:
+                      imageUrl ?? "", // Use empty string if imageUrl is null
                 ),
               ),
             );
@@ -38,7 +39,7 @@ class LostInformCards extends StatelessWidget {
                 height: 220,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: const Color.fromARGB(255, 182, 4, 242),
+                  color: const Color.fromARGB(255, 124, 87, 137),
                   boxShadow: const [
                     BoxShadow(
                       color: Color(0x4D000000),

@@ -49,7 +49,7 @@ class LoginInPage extends StatelessWidget {
               0, screenHeight * 0.3, 0, screenHeight * 0.15),
           width: double.infinity,
           height: double.infinity,
-          color: const Color.fromARGB(255, 127, 18, 163),
+          color: const Color.fromARGB(255, 239, 192, 255),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
