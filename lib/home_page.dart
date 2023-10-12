@@ -8,7 +8,7 @@ import 'privacy_policy_page.dart';
 import 'help_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'first_page.dart';
-import 'user_detail_page.dart';
+import 'profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,23 +19,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedBarIndex = 0;
-
-  // Function to sign out the user
-  Future<void> _signOut(BuildContext context) async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      // Navigate back to the login page
-      // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const FirstPage()),
-      );
-    } catch (e) {
-      // ignore: avoid_print
-      print("Error during sign out: $e");
-      // Handle sign-out errors here
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,19 +60,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 actions: [
-                  /*IconButton(
-                    icon: const Icon(Icons.logout), // Sign-out icon
-                    onPressed: () => _signOut(context),
-                  ),  log out button*/
-                  // Add a user profile button
                   IconButton(
-                    icon: const Icon(Icons.person), // User profile icon
+                    icon: const Icon(Icons.account_circle), // Profile icon
                     onPressed: () {
+                      // Handle profile button tap
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => UserDetailsPage(),
-                        ),
+                            builder: (context) => const ProfilePage()),
                       );
                     },
                   ),
