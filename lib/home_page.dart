@@ -8,6 +8,7 @@ import 'privacy_policy_page.dart';
 import 'help_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'first_page.dart';
+import 'user_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -76,9 +77,21 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 actions: [
-                  IconButton(
+                  /*IconButton(
                     icon: const Icon(Icons.logout), // Sign-out icon
                     onPressed: () => _signOut(context),
+                  ),  log out button*/
+                  // Add a user profile button
+                  IconButton(
+                    icon: const Icon(Icons.person), // User profile icon
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UserDetailsPage(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               )
