@@ -86,6 +86,27 @@ class FirstPage extends StatelessWidget {
                 child: const Text('SIGNUP'),
               ),
             ),
+            const SizedBox(height: 30),
+            SizedBox(
+              width: 122,
+              height: 42,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginInPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFD9D9D9),
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
+                child: const Text('ADMIN LOGIN'),
+              ),
+            ),
           ],
         ),
       ),
