@@ -6,6 +6,7 @@ class ClaimPage extends StatefulWidget {
   const ClaimPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ClaimPageState createState() => _ClaimPageState();
 }
 
@@ -21,7 +22,12 @@ class _ClaimPageState extends State<ClaimPage> {
   final TextEditingController claimedItemLocationController =
       TextEditingController();
 
-  final DatabaseReference _database = FirebaseDatabase.instance.reference();
+  late DatabaseReference _database;
+  @override
+  void initState() {
+    super.initState();
+    _database = FirebaseDatabase.instance.ref();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,50 +73,48 @@ class _ClaimPageState extends State<ClaimPage> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              ElevatedButton(
+              MaterialButton(
                 onPressed: () {
                   // Get the data from the form controllers
-                  String itemDescription = claimedItemDescriptionController.text;
-                  String identifyingMark = claimedItemMarkController.text;
-                  String wallpaperImage = claimedItemWallpaperController.text;
-                  String time = claimedItemTimeController.text;
-                  String location = claimedItemLocationController.text;
 
                   // Create a map to store the claimed item details
-                  Map<String, dynamic> claimedItemData = {
-                    'itemDescription': itemDescription,
-                    'identifyingMark': identifyingMark,
-                    'wallpaperImage': wallpaperImage,
-                    'time': time,
-                    'location': location,
+                  Map<String, String> claimedItemData = {
+                    'itemDescription': claimedItemDescriptionController.text,
+                    'identifyingMark': claimedItemMarkController.text,
+                    'wallpaperImage': claimedItemWallpaperController.text,
+                    'time': claimedItemTimeController.text,
+                    'location': claimedItemLocationController.text,
                   };
 
                   // Send the claimed item data to Firebase Realtime Database
-                  _database.child("claimedItems").push().set(claimedItemData);
+                  _database
+                      .child("claimedItemData")
+                      .push()
+                      .set(claimedItemData);
 
                   // Provide feedback to the user
                   showDialog(
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("Claimed Item Submitted"),
-                        content: Text("Your claimed item details have been submitted successfully!"),
+                        title: const Text("Claimed Item Submitted"),
+                        content: const Text(
+                            "Your claimed item details have been submitted successfully!"),
                         actions: [
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: Text("OK"),
+                            child: const Text("OK"),
                           ),
                         ],
                       );
                     },
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 182, 4, 242),
-                ),
+                // ignore: sort_child_properties_last
                 child: const Text('Submit Claimed Item'),
+                color: const Color.fromARGB(255, 182, 4, 242),
               ),
             ],
           ),

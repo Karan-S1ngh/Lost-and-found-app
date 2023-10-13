@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class FoundPage extends StatefulWidget {
   const FoundPage({super.key});
@@ -17,6 +18,8 @@ class _FoundPageState extends State<FoundPage> {
   final TextEditingController foundItemTimeController = TextEditingController();
   final TextEditingController foundItemLocationController =
       TextEditingController();
+      
+ final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +67,43 @@ class _FoundPageState extends State<FoundPage> {
               const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
-                  // Implement your logic for handling found items here
-                  // You can access the text entered in the controllers
+                  // Get the data from the form controllers
+                  String itemDescription = foundItemLocationController.text;
+                  String identifyingMark = foundItemLocationController.text;
+                  String wallpaperImage = foundItemLocationController.text;
+                  String time = foundItemLocationController.text;
+                  String location = foundItemLocationController.text;
+
+                  // Create a map to store the claimed item details
+                  Map<String, dynamic> foundItemData = {
+                    'itemDescription': itemDescription,
+                    'identifyingMark': identifyingMark,
+                    'wallpaperImage': wallpaperImage,
+                    'time': time,
+                    'location': location,
+                  };
+
+                  // Send the claimed item data to Firebase Realtime Database
+                  _database.child("foundItems").push().set(foundItemData);
+
+                  // Provide feedback to the user
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text("Found Item Submitted"),
+                        content: const Text("Your found item details have been submitted successfully!"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 182, 4, 242),
