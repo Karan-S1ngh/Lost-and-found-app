@@ -86,31 +86,54 @@ class _ClaimPageState extends State<ClaimPage> {
                     'location': claimedItemLocationController.text,
                   };
 
-                  // Send the claimed item data to Firebase Realtime Database
-                  _database
-                      .child("claimedItemData")
-                      .push()
-                      .set(claimedItemData);
+                  try {
+                    _database
+                        .child("claimedItemData")
+                        .push()
+                        .set(claimedItemData);
 
-                  // Provide feedback to the user
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text("Claimed Item Submitted"),
-                        content: const Text(
-                            "Your claimed item details have been submitted successfully!"),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text("OK"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+                    // Provide feedback to the user
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Claimed Item Submitted"),
+                          content: const Text(
+                              "Your claimed item details have been submitted successfully!"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } catch (e) {
+                    print("Error submitting claimed item: $e");
+
+                    // Feedback to the user about the error
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Error"),
+                          content: const Text(
+                              "An error occurred while submitting the claimed item."),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 },
                 // ignore: sort_child_properties_last
                 child: const Text('Submit Claimed Item'),
