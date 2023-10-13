@@ -6,6 +6,7 @@ class ClaimPage extends StatefulWidget {
   const ClaimPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ClaimPageState createState() => _ClaimPageState();
 }
 
@@ -102,7 +103,7 @@ class _ClaimPageState extends State<ClaimPage> {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: Text("OK"),
+                            child: const Text("OK"),
                           ),
                         ],
                       );
