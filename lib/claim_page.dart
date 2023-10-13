@@ -21,7 +21,7 @@ class _ClaimPageState extends State<ClaimPage> {
   final TextEditingController claimedItemLocationController =
       TextEditingController();
 
-  final DatabaseReference _database = FirebaseDatabase.instance.reference();
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,8 @@ class _ClaimPageState extends State<ClaimPage> {
               ElevatedButton(
                 onPressed: () {
                   // Get the data from the form controllers
-                  String itemDescription = claimedItemDescriptionController.text;
+                  String itemDescription =
+                      claimedItemDescriptionController.text;
                   String identifyingMark = claimedItemMarkController.text;
                   String wallpaperImage = claimedItemWallpaperController.text;
                   String time = claimedItemTimeController.text;
@@ -93,8 +94,9 @@ class _ClaimPageState extends State<ClaimPage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("Claimed Item Submitted"),
-                        content: Text("Your claimed item details have been submitted successfully!"),
+                        title: const Text("Claimed Item Submitted"),
+                        content: const Text(
+                            "Your claimed item details have been submitted successfully!"),
                         actions: [
                           TextButton(
                             onPressed: () {
