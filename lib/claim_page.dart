@@ -112,6 +112,7 @@ class _ClaimPageState extends State<ClaimPage> {
                     },
                   );
                 },
+                // ignore: sort_child_properties_last
                 child: const Text('Submit Claimed Item'),
                 color: const Color.fromARGB(255, 182, 4, 242),
               ),
