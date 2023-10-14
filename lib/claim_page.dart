@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -74,7 +76,7 @@ class _ClaimPageState extends State<ClaimPage> {
               ),
               const SizedBox(height: 20.0),
               MaterialButton(
-                onPressed: () {
+                onPressed: () async {
                   // Get the data from the form controllers
 
                   // Create a map to store the claimed item details
@@ -86,13 +88,18 @@ class _ClaimPageState extends State<ClaimPage> {
                     'location': claimedItemLocationController.text,
                   };
 
+                  // Send the claimed item data to Firebase Realtime Database
                   try {
-                    _database
+                    await _database
                         .child("claimedItemData")
                         .push()
                         .set(claimedItemData);
+                  } catch (e) {
+                    log(e.toString());
+                  }
 
-                    // Provide feedback to the user
+                  // Provide feedback to the user
+                  if (context.mounted) {
                     showDialog(
                       context: context,
                       builder: (context) {
@@ -100,28 +107,6 @@ class _ClaimPageState extends State<ClaimPage> {
                           title: const Text("Claimed Item Submitted"),
                           content: const Text(
                               "Your claimed item details have been submitted successfully!"),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("OK"),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  } catch (e) {
-                    print("Error submitting claimed item: $e");
-
-                    // Feedback to the user about the error
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text("Error"),
-                          content: const Text(
-                              "An error occurred while submitting the claimed item."),
                           actions: [
                             TextButton(
                               onPressed: () {

@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '350178287111',
     projectId: 'lost-and-found-e97d5',
     authDomain: 'lost-and-found-e97d5.firebaseapp.com',
+    databaseURL: 'https://lost-and-found-e97d5-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'lost-and-found-e97d5.appspot.com',
   );
 
@@ -57,6 +58,7 @@ class DefaultFirebaseOptions {
     appId: '1:350178287111:android:4a83f152c86b75bb0e94a2',
     messagingSenderId: '350178287111',
     projectId: 'lost-and-found-e97d5',
+    databaseURL: 'https://lost-and-found-e97d5-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'lost-and-found-e97d5.appspot.com',
   );
 
@@ -65,6 +67,7 @@ class DefaultFirebaseOptions {
     appId: '1:350178287111:ios:bd5baa959b293c9a0e94a2',
     messagingSenderId: '350178287111',
     projectId: 'lost-and-found-e97d5',
+    databaseURL: 'https://lost-and-found-e97d5-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'lost-and-found-e97d5.appspot.com',
     iosBundleId: 'com.example.test',
   );
@@ -74,6 +77,7 @@ class DefaultFirebaseOptions {
     appId: '1:350178287111:ios:f54e491e1235a0c20e94a2',
     messagingSenderId: '350178287111',
     projectId: 'lost-and-found-e97d5',
+    databaseURL: 'https://lost-and-found-e97d5-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'lost-and-found-e97d5.appspot.com',
     iosBundleId: 'com.example.test.RunnerTests',
   );
