@@ -8,8 +8,16 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 89, 25, 100),
-      body: Center(
+        //backgroundColor: const Color.fromARGB(255, 89, 25, 100),
+        body: Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+              "lib/images/first page.png"), // Adjust the path accordingly
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -44,7 +52,7 @@ class FirstPage extends StatelessWidget {
               size: 200,
               color: Colors.white,
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 100),
             SizedBox(
               width: 122,
               height: 42,
@@ -56,7 +64,7 @@ class FirstPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFD9D9D9),
+                  backgroundColor: const Color.fromARGB(255, 129, 128, 128),
                   foregroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
@@ -77,7 +85,7 @@ class FirstPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFD9D9D9),
+                  backgroundColor: const Color.fromARGB(255, 129, 128, 128),
                   foregroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -98,7 +106,7 @@ class FirstPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFD9D9D9),
+                  backgroundColor: const Color.fromARGB(255, 129, 128, 128),
                   foregroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
@@ -110,6 +118,6 @@ class FirstPage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }
