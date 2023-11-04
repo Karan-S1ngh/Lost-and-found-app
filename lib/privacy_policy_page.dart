@@ -75,7 +75,7 @@ class PrivacyPolicySection extends StatelessWidget {
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color:  Color.fromARGB(255, 182, 4, 242),
+            color: Color.fromARGB(255, 182, 4, 242),
           ),
         ),
         const SizedBox(height: 10),
