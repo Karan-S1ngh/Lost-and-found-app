@@ -19,38 +19,40 @@ class PrivacyPolicyPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const PrivacyPolicySection(
-              title: 'Privacy Concerns',
-              content:
-                  "Traditional systems may require users to share personal information, raising privacy concerns. Our university-specific app can use secure university IDs for authentication, enhancing user privacy.",
-            ),
-            const PrivacyPolicySection(
-              title: 'Accountability and False Reports',
-              content:
-                  "Traditional systems may lack accountability, allowing for false reports. By tying users to university IDs, our app discourages false claims and can impose consequences for dishonest reporting.",
-            ),
-            const PrivacyPolicySection(
-              title: 'Efficiency and Geographic Scope',
-              content:
-                  "Traditional lost and found services often cover larger areas, making them less efficient for campus-specific needs. Our app focuses exclusively on the university campus, enhancing efficiency.",
-            ),
-            const PrivacyPolicySection(
-              title: 'User Experience and Feedback',
-              content:
-                  "Some traditional systems have clunky user interfaces, which can discourage users. Our app's categorized search feature simplifies item retrieval and improves user experience. It also includes feedback features for continuous improvement.",
-            ),
-            const SizedBox(height: 30),
-            Text(
-              "Your privacy and satisfaction are our top priorities. If you have any concerns or suggestions regarding our privacy policy, please contact us.",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.purple[700],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const PrivacyPolicySection(
+                title: 'Privacy Concerns',
+                content:
+                    "Traditional systems may require users to share personal information, raising privacy concerns. Our university-specific app can use secure university IDs for authentication, enhancing user privacy.",
               ),
-            ),
-          ],
+              const PrivacyPolicySection(
+                title: 'Accountability and False Reports',
+                content:
+                    "Traditional systems may lack accountability, allowing for false reports. By tying users to university IDs, our app discourages false claims and can impose consequences for dishonest reporting.",
+              ),
+              const PrivacyPolicySection(
+                title: 'Efficiency and Geographic Scope',
+                content:
+                    "Traditional lost and found services often cover larger areas, making them less efficient for campus-specific needs. Our app focuses exclusively on the university campus, enhancing efficiency.",
+              ),
+              const PrivacyPolicySection(
+                title: 'User Experience and Feedback',
+                content:
+                    "Some traditional systems have clunky user interfaces, which can discourage users. Our app's categorized search feature simplifies item retrieval and improves user experience. It also includes feedback features for continuous improvement.",
+              ),
+              const SizedBox(height: 30),
+              Text(
+                "Your privacy and satisfaction are our top priorities. If you have any concerns or suggestions regarding our privacy policy, please contact us.",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.purple[700],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
