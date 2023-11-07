@@ -10,7 +10,11 @@ class FoundPage extends StatefulWidget {
 }
 
 class _FoundPageState extends State<FoundPage> {
-  final TextEditingController foundItemDescriptionController =
+  final TextEditingController claimedItemColorController =
+      TextEditingController();
+  final TextEditingController claimedItemBrandController =
+      TextEditingController();
+  final TextEditingController claimedItemModelController =
       TextEditingController();
   final TextEditingController foundItemMarkController = TextEditingController();
   final TextEditingController foundItemWallpaperController =
@@ -18,8 +22,8 @@ class _FoundPageState extends State<FoundPage> {
   final TextEditingController foundItemTimeController = TextEditingController();
   final TextEditingController foundItemLocationController =
       TextEditingController();
-      
- final DatabaseReference _database = FirebaseDatabase.instance.ref();
+
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +39,21 @@ class _FoundPageState extends State<FoundPage> {
             children: [
               const Text('Found Item'),
               TextFormField(
-                controller: foundItemDescriptionController,
+                controller: claimedItemColorController,
                 decoration: const InputDecoration(
-                  labelText: 'Item Description (Color, Brand, Model)',
+                  labelText: 'Color of item',
+                ),
+              ),
+              TextFormField(
+                controller: claimedItemBrandController,
+                decoration: const InputDecoration(
+                  labelText: 'Brand',
+                ),
+              ),
+              TextFormField(
+                controller: claimedItemModelController,
+                decoration: const InputDecoration(
+                  labelText: 'Model',
                 ),
               ),
               TextFormField(
@@ -68,15 +84,19 @@ class _FoundPageState extends State<FoundPage> {
               ElevatedButton(
                 onPressed: () {
                   // Get the data from the form controllers
-                  String itemDescription = foundItemLocationController.text;
-                  String identifyingMark = foundItemLocationController.text;
-                  String wallpaperImage = foundItemLocationController.text;
-                  String time = foundItemLocationController.text;
+                  String itemColor = claimedItemColorController.text;
+                  String brand = claimedItemBrandController.text;
+                  String model = claimedItemModelController.text;
+                  String identifyingMark = foundItemMarkController.text;
+                  String wallpaperImage = foundItemWallpaperController.text;
+                  String time = foundItemTimeController.text;
                   String location = foundItemLocationController.text;
 
                   // Create a map to store the claimed item details
                   Map<String, dynamic> foundItemData = {
-                    'itemDescription': itemDescription,
+                    'itemColor': itemColor,
+                    'brand': brand,
+                    'model': model,
                     'identifyingMark': identifyingMark,
                     'wallpaperImage': wallpaperImage,
                     'time': time,
@@ -92,7 +112,8 @@ class _FoundPageState extends State<FoundPage> {
                     builder: (context) {
                       return AlertDialog(
                         title: const Text("Found Item Submitted"),
-                        content: const Text("Your found item details have been submitted successfully!"),
+                        content: const Text(
+                            "Your found item details have been submitted successfully!"),
                         actions: [
                           TextButton(
                             onPressed: () {

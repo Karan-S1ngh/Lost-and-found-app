@@ -13,7 +13,11 @@ class ClaimPage extends StatefulWidget {
 }
 
 class _ClaimPageState extends State<ClaimPage> {
-  final TextEditingController claimedItemDescriptionController =
+  final TextEditingController claimedItemColorController =
+      TextEditingController();
+  final TextEditingController claimedItemBrandController =
+      TextEditingController();
+  final TextEditingController claimedItemModelController =
       TextEditingController();
   final TextEditingController claimedItemMarkController =
       TextEditingController();
@@ -45,9 +49,21 @@ class _ClaimPageState extends State<ClaimPage> {
             children: [
               const Text('Claimed Item'),
               TextFormField(
-                controller: claimedItemDescriptionController,
+                controller: claimedItemColorController,
                 decoration: const InputDecoration(
-                  labelText: 'Item Description (Color, Brand, Model)',
+                  labelText: 'Color of item',
+                ),
+              ),
+              TextFormField(
+                controller: claimedItemBrandController,
+                decoration: const InputDecoration(
+                  labelText: 'Brand',
+                ),
+              ),
+              TextFormField(
+                controller: claimedItemModelController,
+                decoration: const InputDecoration(
+                  labelText: 'Model',
                 ),
               ),
               TextFormField(
@@ -81,7 +97,9 @@ class _ClaimPageState extends State<ClaimPage> {
 
                   // Create a map to store the claimed item details
                   Map<String, String> claimedItemData = {
-                    'itemDescription': claimedItemDescriptionController.text,
+                    'itemColor': claimedItemColorController.text,
+                    'brand': claimedItemBrandController.text,
+                    'model': claimedItemModelController.text,
                     'identifyingMark': claimedItemMarkController.text,
                     'wallpaperImage': claimedItemWallpaperController.text,
                     'time': claimedItemTimeController.text,
