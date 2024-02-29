@@ -40,6 +40,7 @@ class LoginInPage extends StatelessWidget {
     double fem = screenWidth / 414; // Assuming design width is 414
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -112,7 +113,7 @@ class LoginInPage extends StatelessWidget {
                 _buildInputField('EMAIL', fem),
                 SizedBox(height: 40 * fem),
                 _buildInputField('PASSWORD', fem, isPassword: true),
-                SizedBox(height: 30 * fem),
+                SizedBox(height: 26 * fem),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -134,8 +135,32 @@ class LoginInPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20 * fem),
+                SizedBox(height: 22 * fem),
                 _buildLoginInButton(fem, context),
+                SizedBox(height: 14 * fem),
+
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account ? ",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
+                    ),
+                    Text(
+                      "Sign Up",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 109, 57, 199),
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19),
+                    )
+                  ],
+                ),
+                SizedBox(height: 18 * fem),
+                const Center(
+                    child: Text("Or with",
+                        style: TextStyle(color: Colors.grey, fontSize: 15)))
               ],
             ),
           ),
