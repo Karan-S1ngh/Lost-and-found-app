@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
         body: body,
         floatingActionButton: SafeArea(
           child: FloatingActionButton.extended(
-            backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+            backgroundColor: const Color.fromARGB(255, 109, 57, 199),
             foregroundColor: Colors.white,
             icon: const Icon(Icons.add),
             label: const Text('Add Item'),
@@ -99,27 +99,27 @@ class _HomePageState extends State<HomePage> {
             BarItem(
               text: "Lost",
               iconData: Icons.search_off,
-              color: const Color.fromARGB(255, 182, 4, 242),
+              color: const Color.fromARGB(255, 109, 57, 199),
             ),
             BarItem(
               text: "Found",
               iconData: Icons.search,
-              color: const Color.fromARGB(255, 182, 4, 242),
+              color: const Color.fromARGB(255, 109, 57, 199),
             ),
             BarItem(
               text: "About Us",
               iconData: Icons.info,
-              color: const Color.fromARGB(255, 182, 4, 242),
+              color: const Color.fromARGB(255, 109, 57, 199),
             ),
             BarItem(
               text: "Privacy",
               iconData: Icons.lock,
-              color: const Color.fromARGB(255, 182, 4, 242),
+              color: const Color.fromARGB(255, 109, 57, 199),
             ),
             BarItem(
               text: "Help",
               iconData: Icons.help,
-              color: const Color.fromARGB(255, 182, 4, 242),
+              color: const Color.fromARGB(255, 109, 57, 199),
             ),
           ],
           animationDuration: const Duration(milliseconds: 150),

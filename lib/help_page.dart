@@ -7,7 +7,7 @@ class HelpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+        backgroundColor: const Color.fromARGB(255, 109, 57, 199),
         title: const Text(
           'Help',
           style: TextStyle(
@@ -16,9 +16,10 @@ class HelpPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(25.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -26,13 +27,13 @@ class HelpPage extends StatelessWidget {
               const Icon(
                 Icons.help,
                 size: 80,
-                color:  Color.fromARGB(255, 182, 4, 242),
+                color: Color.fromARGB(255, 109, 57, 199),
               ),
               const SizedBox(height: 20),
               const Text(
                 'Welcome to our Help Center!',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -41,7 +42,7 @@ class HelpPage extends StatelessWidget {
                 'If you need assistance, please feel free to contact us.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   color: Colors.grey[700],
                 ),
               ),
@@ -51,15 +52,17 @@ class HelpPage extends StatelessWidget {
                   // Add functionality for the button
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+                  backgroundColor: const Color.fromARGB(255, 109, 57, 199),
                 ),
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                   child: Text(
                     'Contact Support',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),

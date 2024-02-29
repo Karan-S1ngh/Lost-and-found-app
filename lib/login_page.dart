@@ -72,7 +72,7 @@ class LoginInPage extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 117, 26, 147),
+          color: Color.fromARGB(255, 109, 57, 199),
         ),
         child: Container(
           padding: EdgeInsets.fromLTRB(24 * fem, 68 * fem, 24 * fem, 22 * fem),

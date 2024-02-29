@@ -7,7 +7,8 @@ class PrivacyPolicyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+        backgroundColor: const Color.fromARGB(255, 109, 57, 199),
+        foregroundColor: Colors.white,
         title: const Text(
           'Privacy Policy',
           style: TextStyle(
@@ -18,7 +19,7 @@ class PrivacyPolicyPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(25.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +76,7 @@ class PrivacyPolicySection extends StatelessWidget {
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 182, 4, 242),
+            color: Color.fromARGB(255, 109, 57, 199),
           ),
         ),
         const SizedBox(height: 10),

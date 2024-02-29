@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const Text(
               'Welcome User!', // Display user's name here
-              style:  TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -88,12 +88,14 @@ class _ProfilePageState extends State<ProfilePage> {
               child: const Text('Contact Us'),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: () => _signOut(context),
+              icon: const Icon(Icons.logout),
               // ignore: sort_child_properties_last
-              child: const Text('Sign Out'),
+              label: const Text('Sign Out'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 17, 0), // Set sign-out button color to red
+                backgroundColor: const Color.fromARGB(
+                    255, 255, 17, 0), // Set sign-out button color to red
               ),
             ),
           ],

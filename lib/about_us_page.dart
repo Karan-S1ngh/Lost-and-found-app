@@ -7,7 +7,8 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 182, 4, 242), 
+        backgroundColor: const Color.fromARGB(255, 109, 57, 199),
+        foregroundColor: Colors.white,
         title: const Text(
           'About Us',
           style: TextStyle(
@@ -18,18 +19,18 @@ class AboutUsPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(25.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                "Welcome to the ultimate lost and found solution.",
+                "Welcome to the ultimate lost and found solution !",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 27,
                   fontWeight: FontWeight.bold,
-                  color:  Color.fromARGB(255, 182, 4, 242),
+                  color: Color.fromARGB(255, 109, 57, 199),
                 ),
               ),
               const SizedBox(height: 20),
@@ -37,23 +38,23 @@ class AboutUsPage extends StatelessWidget {
                 "We're dedicated to helping you find your lost items quickly and effortlessly.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 19,
                   color: Colors.grey[700],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 19),
               const Text(
                 "Key Features:",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color:  Color.fromARGB(255, 182, 4, 242),
+                  color: Color.fromARGB(255, 109, 57, 199),
                 ),
               ),
               const SizedBox(height: 10),
               const FeatureTile(
-                icon: Icons.timer, 
+                icon: Icons.timer,
                 text: "Report lost items instantly.",
               ),
               const FeatureTile(
@@ -74,15 +75,18 @@ class AboutUsPage extends StatelessWidget {
                   // Add functionality for the button
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 182, 4, 242), // Button color
+                  backgroundColor:
+                      const Color.fromARGB(255, 109, 57, 199), // Button color
                 ),
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                   child: Text(
                     'Join Us',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 19,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -106,7 +110,8 @@ class FeatureTile extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: const Color.fromARGB(255, 182, 4, 242), // Icon color
+        color: const Color.fromARGB(255, 109, 57, 199), // Icon color
+        size: 27,
       ),
       title: Text(
         text,
