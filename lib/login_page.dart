@@ -50,17 +50,23 @@ class LoginInPage extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(22 * fem, 65 * fem, 22 * fem, 199 * fem),
           width: double.infinity,
           height: double.infinity,
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: const Color.fromARGB(255, 255, 255, 255),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 25 * fem),
-                  width: 29 * fem,
-                  height: 21 * fem,
-                  child: const Icon(Icons.arrow_back, size: 30),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 25 * fem),
+                    width: 29 * fem,
+                    height: 21 * fem,
+                    child: const Icon(Icons.arrow_back, size: 30),
+                  ),
                 ),
+
                 SizedBox(height: 10 * fem),
                 Container(
                   margin: EdgeInsets.only(bottom: 10 * fem),
