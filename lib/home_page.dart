@@ -48,7 +48,8 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: selectedBarIndex <= 1
             ? AppBar(
-                backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+                backgroundColor: const Color.fromARGB(255, 109, 57, 199),
+                foregroundColor: Colors.white,
                 title: Align(
                   alignment: Alignment.center,
                   child: Text(
@@ -75,8 +76,8 @@ class _HomePageState extends State<HomePage> {
               )
             : null, // Hides app bar for About Us, Privacy Policy, and Help pages
         body: body,
-        floatingActionButton: SafeArea(
-          child: FloatingActionButton.extended(
+        floatingActionButton: selectedBarIndex == 0 || selectedBarIndex == 1
+          ? FloatingActionButton.extended(
             backgroundColor: const Color.fromARGB(255, 109, 57, 199),
             foregroundColor: Colors.white,
             icon: const Icon(Icons.add),
@@ -91,8 +92,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             },
-          ),
-        ),
+          )
+          :null,
+        // ),
 
         bottomNavigationBar: AnimatedBottomBar(
           barItems: [
