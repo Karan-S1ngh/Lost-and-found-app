@@ -99,7 +99,7 @@ class LoginInPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 25 * fem),
+                  margin: EdgeInsets.only(bottom: 20 * fem),
                   child: Text(
                     'Sign In to your account',
                     style: GoogleFonts.inter(

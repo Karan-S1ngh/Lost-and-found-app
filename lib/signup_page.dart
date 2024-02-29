@@ -1,12 +1,14 @@
 //import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test/first_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
+  //chatgpt didn't have lines from 12-13
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
@@ -54,7 +56,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double fem = screenWidth / 414;
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       body: Container(
         width: double.infinity,
@@ -63,30 +70,90 @@ class _SignUpPageState extends State<SignUpPage> {
           color: Color.fromARGB(255, 122, 86, 134),
         ),
         child: Container(
-          padding: const EdgeInsets.fromLTRB(0, 100, 0, 100),
+          padding: EdgeInsets.fromLTRB(22 * fem, 65 * fem, 22 * fem, 199 * fem),
           width: double.infinity,
           height: double.infinity,
-          color: const Color.fromARGB(255, 237, 206, 247),
+          color: const Color.fromARGB(255, 255, 255, 255),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'NEW ACCOUNT',
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF000000),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 25 * fem),
+                    width: 29 * fem,
+                    height: 21 * fem,
+                    child: const Icon(Icons.arrow_back, size: 30),
                   ),
                 ),
-                const SizedBox(height: 45),
-                _buildInputField('EMAIL'),
-                const SizedBox(height: 35),
-                _buildInputField('USERNAME'),
-                const SizedBox(height: 45),
-                _buildInputField('PASSWORD', isPassword: true),
-                const SizedBox(height: 50),
-                _buildSignUpButton(),
+                SizedBox(height: 6 * fem),
+                Container(
+                  margin: EdgeInsets.only(bottom: 7 * fem),
+                  width: double.infinity,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 7 * fem),
+                        child: Text(
+                          'Welcome !',
+                          style: GoogleFonts.inter(
+                            fontSize: 35 * fem,
+                            fontWeight: FontWeight.w700,
+                            color: const Color(0xFF000000),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  // margin: const EdgeInsets.only(bottom: 2),
+                  child: Text(
+                    'Create new account',
+                    style: GoogleFonts.inter(
+                      fontSize: 18 * fem,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+
+                // const SizedBox(height: 45),
+                _buildInputField('EMAIL', fem),
+                SizedBox(height: 24 * fem),
+                _buildInputField('USERNAME', fem),
+                SizedBox(height: 24 * fem),
+                _buildInputField('PASSWORD', fem, isPassword: true),
+                SizedBox(height: 22 * fem),
+                _buildSignUpButton(fem, context),
+                SizedBox(height: 14 * fem),
+
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account ? ",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
+                    ),
+                    Text(
+                      "Login",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 109, 57, 199),
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19),
+                    )
+                  ],
+                ),
+                SizedBox(height: 18 * fem),
+                const Center(
+                    child: Text("Or with",
+                        style: TextStyle(color: Colors.grey, fontSize: 15)))
               ],
             ),
           ),
@@ -95,26 +162,25 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _buildInputField(String label, {bool isPassword = false}) {
-    return SizedBox(
-      width: 320,
-      height: 50,
+  Widget _buildInputField(String label, double fem, {bool isPassword = false}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20 * fem),
       child: TextField(
         controller: isPassword
             ? _passwordController
             : (label == 'EMAIL' ? _emailController : _usernameController),
         obscureText: isPassword,
-        style: const TextStyle(
-          fontSize: 18,
+        style: TextStyle(
+          fontSize: 18 * fem,
           fontWeight: FontWeight.w700,
-          color: Color(0xFF000000),
+          color: const Color(0xFF000000),
         ),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: const TextStyle(
-            fontSize: 18,
+          labelStyle: TextStyle(
+            fontSize: 18 * fem,
             fontWeight: FontWeight.w700,
-            color: Color(0xFF000000),
+            color: const Color(0xFF000000),
           ),
           focusedBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: Color(0xFF000000)),
@@ -124,24 +190,31 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _buildSignUpButton() {
+  Widget _buildSignUpButton(double fem, BuildContext context) {
     return Container(
-      width: 320,
-      height: 60,
+      width: double.infinity,
+      height: 60 * fem,
       decoration: BoxDecoration(
-        color: const Color(0xFFFFFFFF),
-        borderRadius: BorderRadius.circular(30),
+        color: Color.fromARGB(255, 109, 57, 199),
+        borderRadius: BorderRadius.circular(30 * fem),
       ),
-      child: TextButton(
-        onPressed: _handleSignUp,
-        child: const Text(
+      child: ElevatedButton(
+        onPressed: () {
+          _handleSignUp();
+        },
+        // ignore: sort_child_properties_last
+        child: Text(
           'SIGN UP',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 22 * fem,
             fontWeight: FontWeight.w700,
-            color: Color(0xFF000000),
+            color: Colors.white,
           ),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
         ),
       ),
     );
