@@ -27,6 +27,7 @@ class AnimatedBottomBar extends StatelessWidget {
   final Duration animationDuration;
   final BarStyle barStyle;
   final void Function(int) onBarTap;
+  final int selectedBarIndex;
 
   const AnimatedBottomBar({
     super.key,
@@ -34,6 +35,7 @@ class AnimatedBottomBar extends StatelessWidget {
     required this.animationDuration,
     required this.barStyle,
     required this.onBarTap,
+    required this.selectedBarIndex,
   });
 
   @override
@@ -48,13 +50,16 @@ class AnimatedBottomBar extends StatelessWidget {
           (index) => _buildBarItem(
             item: barItems[index],
             index: index,
+            selectedIndex: selectedBarIndex,
           ),
         ),
       ),
     );
   }
 
-  Widget _buildBarItem({required BarItem item, required int index}) {
+  Widget _buildBarItem(
+      {required BarItem item, required int index, required int selectedIndex}) {
+    final isSelected = index == selectedIndex;
     return Expanded(
       child: InkWell(
         onTap: () => onBarTap(index),
@@ -63,16 +68,32 @@ class AnimatedBottomBar extends StatelessWidget {
           child: Center(
             child: Padding(
               padding: EdgeInsets.only(
-                bottom: item.text == "Privacy" ? 8 : 5,
+                bottom: isSelected ? 8 : 5,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    item.iconData,
-                    size: barStyle.iconSize,
-                    color: item.color,
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: isSelected
+                          ? [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 73, 71, 71)
+                                    .withOpacity(0.3),
+                                blurRadius: 13,
+                                offset: const Offset(0, 3),
+                              ),
+                            ]
+                          : [],
+                    ),
+                    child: Icon(
+                      item.iconData,
+                      size: barStyle.iconSize,
+                      color: isSelected
+                          ? const Color.fromARGB(255, 109, 57, 199)
+                          : item.color,
+                    ),
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -80,8 +101,10 @@ class AnimatedBottomBar extends StatelessWidget {
                       item.text,
                       style: TextStyle(
                         fontSize: barStyle.fontSize,
-                        fontWeight: FontWeight.w600,
-                        color: item.color,
+                        fontWeight: FontWeight.w700,
+                        color: isSelected
+                            ? const Color.fromARGB(255, 109, 57, 199)
+                            : item.color,
                       ),
                     ),
                   ),

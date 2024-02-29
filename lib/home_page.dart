@@ -76,24 +76,26 @@ class _HomePageState extends State<HomePage> {
               )
             : null, // Hides app bar for About Us, Privacy Policy, and Help pages
         body: body,
-        floatingActionButton: selectedBarIndex == 0 || selectedBarIndex == 1
-          ? FloatingActionButton.extended(
-            backgroundColor: const Color.fromARGB(255, 109, 57, 199),
-            foregroundColor: Colors.white,
-            icon: const Icon(Icons.add),
-            label: const Text('Add Item'),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const OnClickTAB();
-                  },
-                ),
-              );
-            },
-          )
-          :null,
+        floatingActionButton: selectedBarIndex == 0 ||
+                selectedBarIndex ==
+                    1 //to remove Add item button from About, Help & Privacy
+            ? FloatingActionButton.extended(
+                backgroundColor: const Color.fromARGB(255, 109, 57, 199),
+                foregroundColor: Colors.white,
+                icon: const Icon(Icons.add),
+                label: const Text('Add Item'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const OnClickTAB();
+                      },
+                    ),
+                  );
+                },
+              )
+            : null,
         // ),
 
         bottomNavigationBar: AnimatedBottomBar(
@@ -101,31 +103,31 @@ class _HomePageState extends State<HomePage> {
             BarItem(
               text: "Lost",
               iconData: Icons.search_off,
-              color: const Color.fromARGB(255, 109, 57, 199),
+              color: const Color.fromARGB(255, 136, 136, 136),
             ),
             BarItem(
               text: "Found",
               iconData: Icons.search,
-              color: const Color.fromARGB(255, 109, 57, 199),
+              color: const Color.fromARGB(255, 136, 136, 136),
             ),
             BarItem(
               text: "About Us",
               iconData: Icons.info,
-              color: const Color.fromARGB(255, 109, 57, 199),
+              color: const Color.fromARGB(255, 136, 136, 136),
             ),
             BarItem(
               text: "Privacy",
               iconData: Icons.lock,
-              color: const Color.fromARGB(255, 109, 57, 199),
+              color: const Color.fromARGB(255, 136, 136, 136),
             ),
             BarItem(
               text: "Help",
               iconData: Icons.help,
-              color: const Color.fromARGB(255, 109, 57, 199),
+              color: const Color.fromARGB(255, 136, 136, 136),
             ),
           ],
           animationDuration: const Duration(milliseconds: 150),
-          barStyle: BarStyle(fontSize: 13.0, iconSize: 30.0),
+          barStyle: BarStyle(fontSize: 15.0, iconSize: 32.0),
           onBarTap: (index) {
             setState(
               () {
@@ -133,6 +135,7 @@ class _HomePageState extends State<HomePage> {
               },
             );
           },
+          selectedBarIndex: selectedBarIndex,
         ),
       ),
     );
