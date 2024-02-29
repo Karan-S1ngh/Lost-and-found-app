@@ -31,9 +31,8 @@ class LoginInPage extends StatelessWidget {
           .signInWithEmailAndPassword(email: email, password: password);
       if (userCredential.user != null) {
         // User logged in successfully, navigate to home page
-        // ignore: use_build_context_synchronously
+
         Navigator.pushReplacement(
-          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
@@ -279,7 +278,7 @@ class LoginInPage extends StatelessWidget {
       width: double.infinity,
       height: 60 * fem,
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 109, 57, 199),
+        color: const Color.fromARGB(255, 109, 57, 199),
         borderRadius: BorderRadius.circular(30 * fem),
       ),
       child: ElevatedButton(

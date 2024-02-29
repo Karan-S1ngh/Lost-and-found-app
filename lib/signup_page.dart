@@ -1,7 +1,6 @@
 //import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test/components/square_tile.dart';
@@ -65,7 +64,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
     double fem = screenWidth / 414;
 
     return Scaffold(
@@ -118,15 +117,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                 ),
-                Container(
-                  // margin: const EdgeInsets.only(bottom: 2),
-                  child: Text(
-                    'Create new account',
-                    style: GoogleFonts.inter(
-                      fontSize: 18 * fem,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                    ),
+                Text(
+                  'Create new account',
+                  style: GoogleFonts.inter(
+                    fontSize: 18 * fem,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
                   ),
                 ),
 
@@ -248,7 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
       width: double.infinity,
       height: 60 * fem,
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 109, 57, 199),
+        color: const Color.fromARGB(255, 109, 57, 199),
         borderRadius: BorderRadius.circular(30 * fem),
       ),
       child: ElevatedButton(
