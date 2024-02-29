@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:test/components/square_tile.dart';
 import 'package:test/home_page.dart';
 import 'package:logger/logger.dart';
 import 'password_recovery_page.dart';
@@ -14,29 +18,52 @@ class LoginInPage extends StatelessWidget {
   final logger = Logger();
 
   Future<void> _handleLogin(BuildContext context) async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      _showSnackBar(context, "Please fill in all fields");
+      return;
+    }
+
     try {
       UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: _emailController.text, password: _passwordController.text);
+          .signInWithEmailAndPassword(email: email, password: password);
       if (userCredential.user != null) {
         // User logged in successfully, navigate to home page
         // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
       }
     } catch (e) {
-      // Handle login errors (e.g., invalid credentials)
-      logger.d("Error during login: $e");
-      // You can show an error message to the user here if you want
+      if (e is FirebaseAuthException) {
+        if (e.code == 'wrong-password') {
+          _showSnackBar(context, 'Wrong password provided for that user.');
+        } else {
+          _showSnackBar(
+              context, 'No such account: Please recheck email and password');
+        }
+      } else {
+        _showSnackBar(context, 'Error during login: $e');
+      }
     }
   }
+
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  // logger.d("Error during login: $e");
+  // You can show an error message to the user here if you want
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
     double fem = screenWidth / 414; // Assuming design width is 414
 
     return Scaffold(
@@ -45,10 +72,10 @@ class LoginInPage extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 182, 4, 242),
+          color: Color.fromARGB(255, 117, 26, 147),
         ),
         child: Container(
-          padding: EdgeInsets.fromLTRB(22 * fem, 65 * fem, 22 * fem, 199 * fem),
+          padding: EdgeInsets.fromLTRB(24 * fem, 68 * fem, 24 * fem, 22 * fem),
           width: double.infinity,
           height: double.infinity,
           color: const Color.fromARGB(255, 255, 255, 255),
@@ -61,22 +88,22 @@ class LoginInPage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 25 * fem),
+                    margin: EdgeInsets.only(bottom: 26 * fem),
                     width: 29 * fem,
                     height: 21 * fem,
                     child: const Icon(Icons.arrow_back, size: 30),
                   ),
                 ),
 
-                SizedBox(height: 10 * fem),
+                SizedBox(height: 4 * fem),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10 * fem),
+                  margin: EdgeInsets.only(bottom: 8 * fem),
                   width: double.infinity,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(right: 9 * fem),
+                        margin: EdgeInsets.only(right: 11 * fem),
                         child: Text(
                           'Welcome Back !',
                           style: GoogleFonts.inter(
@@ -87,19 +114,20 @@ class LoginInPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 0.96 * fem),
+                        margin: EdgeInsets.only(top: 0.99 * fem),
                         width: 26.96 * fem,
                         height: 26.96 * fem,
                         child: const Icon(
                           Icons.waving_hand,
                           color: Color.fromARGB(255, 255, 193, 24),
+                          size: 32,
                         ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 20 * fem),
+                  margin: EdgeInsets.only(bottom: 10 * fem),
                   child: Text(
                     'Sign In to your account',
                     style: GoogleFonts.inter(
@@ -111,56 +139,107 @@ class LoginInPage extends StatelessWidget {
                 ),
                 // // SizedBox(height: 50 * fem),
                 _buildInputField('EMAIL', fem),
-                SizedBox(height: 40 * fem),
+                SizedBox(height: 30 * fem),
                 _buildInputField('PASSWORD', fem, isPassword: true),
-                SizedBox(height: 26 * fem),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const PasswordRecoveryPage();
-                        },
+                SizedBox(height: 28 * fem),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const PasswordRecoveryPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          fontSize: 19 * fem,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
-                    );
-                  },
-                  child: Text(
-                    'Forgot Password?',
-                    style: TextStyle(
-                      fontSize: 20 * fem,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black,
-                      decoration: TextDecoration.underline,
                     ),
-                  ),
+                  ],
                 ),
-                SizedBox(height: 22 * fem),
+                SizedBox(height: 26 * fem),
                 _buildLoginInButton(fem, context),
-                SizedBox(height: 14 * fem),
+                SizedBox(height: 20 * fem),
 
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Don't have an account ? ",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
-                    ),
-                    Text(
-                      "Sign Up",
                       style: TextStyle(
-                          color: Color.fromARGB(255, 109, 57, 199),
-                          decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 19),
+                          fontWeight: FontWeight.w500, fontSize: 19.5),
+                    ),
+                    // clicking on sign up in login page
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const SignUpPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 109, 57, 199),
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 20),
+                      ),
                     )
                   ],
                 ),
-                SizedBox(height: 18 * fem),
-                const Center(
-                    child: Text("Or with",
-                        style: TextStyle(color: Colors.grey, fontSize: 15)))
+                SizedBox(height: 29 * fem),
+
+                // or login with google or apple
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.4,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Text(
+                          " Or login with ",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 112, 111, 111),
+                              fontSize: 17),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.4,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 19),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SquareTile(imagePath: 'lib/images/google.png'),
+                  ],
+                )
               ],
             ),
           ),
@@ -212,7 +291,7 @@ class LoginInPage extends StatelessWidget {
           'LOG IN',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 25 * fem,
+            fontSize: 22 * fem,
             fontWeight: FontWeight.w700,
             color: Colors.white,
           ),

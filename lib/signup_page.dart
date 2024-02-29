@@ -1,9 +1,12 @@
 //import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:test/components/square_tile.dart';
 import 'package:test/first_page.dart';
+import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -25,6 +28,11 @@ class _SignUpPageState extends State<SignUpPage> {
     // ignore: unused_local_variable
     String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
+
+    if (email.isEmpty || username.isEmpty || password.isEmpty) {
+      _showSnackBar('Please fill in all the fields.');
+      return;
+    }
 
     try {
       await FirebaseAuth.instance
@@ -70,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
           color: Color.fromARGB(255, 122, 86, 134),
         ),
         child: Container(
-          padding: EdgeInsets.fromLTRB(22 * fem, 65 * fem, 22 * fem, 199 * fem),
+          padding: EdgeInsets.fromLTRB(24 * fem, 65 * fem, 24 * fem, 22 * fem),
           width: double.infinity,
           height: double.infinity,
           color: const Color.fromARGB(255, 255, 255, 255),
@@ -132,28 +140,73 @@ class _SignUpPageState extends State<SignUpPage> {
                 _buildSignUpButton(fem, context),
                 SizedBox(height: 14 * fem),
 
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Already have an account ? ",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 19),
-                    ),
-                    Text(
-                      "Login",
                       style: TextStyle(
-                          color: Color.fromARGB(255, 109, 57, 199),
-                          decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 19),
+                          fontWeight: FontWeight.w500, fontSize: 19.5),
+                    ),
+                    // clicking on login in sign up page
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginInPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 109, 57, 199),
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 20),
+                      ),
                     )
                   ],
                 ),
-                SizedBox(height: 18 * fem),
-                const Center(
-                    child: Text("Or with",
-                        style: TextStyle(color: Colors.grey, fontSize: 15)))
+                SizedBox(height: 25 * fem),
+                // or login with google or apple
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.4,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Text(
+                          " Or Sign Up with ",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 112, 111, 111),
+                              fontSize: 17),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1.4,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 19),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SquareTile(imagePath: 'lib/images/google.png'),
+                  ],
+                )
               ],
             ),
           ),

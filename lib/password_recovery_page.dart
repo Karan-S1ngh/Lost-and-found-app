@@ -27,46 +27,70 @@ class _PasswordRecoveryPageState extends State<PasswordRecoveryPage> {
           context: context,
           builder: (context) {
             return const AlertDialog(
-              content: Text('Password reset link sent! Check your email.'),
+              content: Text(
+                'Password reset link sent! Check your email.',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
             );
           });
     } on FirebaseAuthException catch (e) {
       print(e);
       showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text(e.message.toString()),
-            );
-          });
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(e.message.toString()),
+          );
+        },
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Password Recovery'),
+        iconTheme: const IconThemeData(color: Colors.white),
+        foregroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 109, 57, 199),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Icon(Icons.lock_outline_sharp, size: 115, color: Colors.grey),
+          const SizedBox(height: 9),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 22.0),
-            child: Text(
-              'Enter your email and we will send password reset link',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
+            child: Column(
+              children: [
+                Text(
+                  'Forgot Password ?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Enter your email and we will send you a password reset link',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20),
+                )
+              ],
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 30),
+          // EMAIL INPUT FIELD
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
               controller: _emailController,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white70),
+                  borderSide: const BorderSide(
+                      color: Color.fromARGB(179, 196, 196, 196)),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -79,11 +103,17 @@ class _PasswordRecoveryPageState extends State<PasswordRecoveryPage> {
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 18),
           MaterialButton(
             onPressed: passwordReset,
-            color: Colors.deepPurple,
-            child: const Text('Reset Password'),
+            color: const Color.fromARGB(255, 109, 57, 199),
+            height: 47,
+            child: const Text(
+              'Reset Password',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         ],
       ),
