@@ -18,6 +18,9 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   File? profilepic;
 
+  //current user
+  final currentUser = FirebaseAuth.instance.currentUser!;
+
   // Function to sign out the user
   Future<void> _signOut(BuildContext context) async {
     try {
@@ -38,68 +41,78 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 232, 176, 250),
+        backgroundColor: const Color.fromARGB(255, 109, 57, 199),
+        foregroundColor: Colors.white,
         title: const Text(
-          'Profile',
+          'Profile Page',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),
         ),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CupertinoButton(
-              onPressed: () async {
-                XFile? selectedImage =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
+      body: ListView(
+        padding: const EdgeInsets.all(25.0),
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CupertinoButton(
+                onPressed: () async {
+                  XFile? selectedImage = await ImagePicker()
+                      .pickImage(source: ImageSource.gallery);
 
-                if (selectedImage != null) {
-                  File convertedFile = File(selectedImage.path);
-                  setState(() {
-                    profilepic = convertedFile;
-                  });
-                  print("image selected!");
-                } else {
-                  print("no image selected");
-                }
-              },
-              padding: EdgeInsets.zero,
-              child: CircleAvatar(
-                radius: 40,
-                backgroundImage:
-                    (profilepic != null) ? FileImage(profilepic!) : null,
-                backgroundColor: const Color.fromARGB(255, 247, 196, 247),
+                  if (selectedImage != null) {
+                    File convertedFile = File(selectedImage.path);
+                    setState(() {
+                      profilepic = convertedFile;
+                    });
+                    print("image selected!");
+                  } else {
+                    print("no image selected");
+                  }
+                },
+                padding: EdgeInsets.zero,
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundImage:
+                      (profilepic != null) ? FileImage(profilepic!) : null,
+                  backgroundColor: const Color.fromARGB(255, 159, 158, 158),
+                  child: (profilepic == null)
+                      ? const Icon(Icons.person, size: 80, color: Colors.white)
+                      : null,
+                ),
               ),
-            ),
-            const Text(
-              'Welcome User!', // Display user's name here
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Handle "Contact Us" button tap
-                // You can navigate to a contact form or contact details page
-              },
-              child: const Text('Contact Us'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: () => _signOut(context),
-              icon: const Icon(Icons.logout),
-              // ignore: sort_child_properties_last
-              label: const Text('Sign Out'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(
-                    255, 255, 17, 0), // Set sign-out button color to red
+              const SizedBox(height: 30),
+              Text(
+                currentUser
+                    .email!, // Display username here instead of user email. First store username in db first
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
-        ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // Handle "Contact Us" button tap
+                  // You can navigate to a contact form or contact details page
+                },
+                child: const Text('Contact Us'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton.icon(
+                onPressed: () => _signOut(context),
+                icon: const Icon(Icons.logout),
+                // ignore: sort_child_properties_last
+                label: const Text('Sign Out'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(
+                      255, 255, 17, 0), // Set sign-out button color to red
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
