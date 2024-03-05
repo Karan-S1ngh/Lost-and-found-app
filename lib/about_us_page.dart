@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AboutUsPage extends StatelessWidget {
-  const AboutUsPage({Key? key});
+  const AboutUsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class FeatureTile extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  const FeatureTile({required this.icon, required this.text});
+  const FeatureTile({super.key,required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
