@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:random_string/random_string.dart';
+
+import 'services/database.dart';
 
 class LostItemAdd extends StatefulWidget {
   const LostItemAdd({super.key});
@@ -10,7 +14,10 @@ class LostItemAdd extends StatefulWidget {
 class _LostItemState extends State<LostItemAdd> {
   String selectedCategory = 'Laptop';
   TextEditingController customCategoryController = TextEditingController();
+  TextEditingController brandController = TextEditingController();
+  TextEditingController colourController = TextEditingController();
   DateTime? selectedDate;
+  TextEditingController emailController = TextEditingController();
   TextEditingController location1Controller = TextEditingController();
   TextEditingController location2Controller = TextEditingController();
   TextEditingController additionalInfoController = TextEditingController();
@@ -118,8 +125,9 @@ class _LostItemState extends State<LostItemAdd> {
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(border: InputBorder.none),
+                child: TextField(
+                  controller: brandController,
+                  decoration: const InputDecoration(border: InputBorder.none),
                 ),
               ),
               const SizedBox(height: 10.0),
@@ -137,8 +145,9 @@ class _LostItemState extends State<LostItemAdd> {
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(border: InputBorder.none),
+                child: TextField(
+                  controller: colourController,
+                  decoration: const InputDecoration(border: InputBorder.none),
                 ),
               ),
               const SizedBox(height: 10.0),
@@ -223,8 +232,9 @@ class _LostItemState extends State<LostItemAdd> {
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(border: InputBorder.none),
+                child: TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(border: InputBorder.none),
                 ),
               ),
               const SizedBox(height: 10.0),
@@ -242,8 +252,9 @@ class _LostItemState extends State<LostItemAdd> {
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: additionalInfoController,
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(vertical: 10.0)),
                   maxLines: null,
@@ -259,7 +270,34 @@ class _LostItemState extends State<LostItemAdd> {
                             const Color.fromARGB(255, 109, 57, 199)),
                         foregroundColor:
                             MaterialStateProperty.all(Colors.white)),
-                    onPressed: () {},
+                    onPressed: () async {
+                      String Id = randomAlphaNumeric(10);
+                      Map<String, dynamic> itemMap = {
+                        'Id': Id,
+                        'category': selectedCategory,
+                        'customCategory': customCategoryController.text,
+                        'brand': brandController.text,
+                        'colour': colourController.text,
+                        'lostSince': selectedDate?.toLocal(),
+                        'location1': location1Controller.text,
+                        'location2': location2Controller.text,
+                        'contactEmail': emailController.text,
+                        'additionalInfo': additionalInfoController.text,
+                      };
+                      await DatabaseMethods()
+                          .addItems(itemMap, Id)
+                          .then((value) {
+                        Fluttertoast.showToast(
+                            msg: "Lost item added successfully !",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor:
+                                const Color.fromARGB(255, 109, 57, 199),
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      });
+                    },
                     child: const Text(
                       "Submit",
                       style: TextStyle(

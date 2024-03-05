@@ -13,7 +13,7 @@ class _LostItemState extends State<FoundItemAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      body: Container(child: Column(children: [],),),
+      body: Container(child: const Column(children: [],),),
     );
   }
 }

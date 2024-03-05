@@ -79,7 +79,7 @@ class AnimatedBottomBar extends StatelessWidget {
                       boxShadow: isSelected
                           ? [
                               BoxShadow(
-                                color: Color.fromARGB(255, 73, 71, 71)
+                                color: const Color.fromARGB(255, 73, 71, 71)
                                     .withOpacity(0.3),
                                 blurRadius: 13,
                                 offset: const Offset(0, 3),
