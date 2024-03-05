@@ -61,15 +61,15 @@ class _OnClickTABState extends State<OnClickTAB> {
           child: ListView(
             children: <Widget>[
               const SizedBox(
-                height: 45,
+                height: 23,
               ),
               Align(
                 alignment: Alignment.center,
                 child: Container(
-                  height: 200,
+                  height: 100,
                   width: 360,
                   decoration: BoxDecoration(
-                    color: const Color(0x5400b9f5),
+                    color: const Color.fromARGB(255, 200, 200, 200),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: _image.existsSync()
@@ -90,37 +90,37 @@ class _OnClickTABState extends State<OnClickTAB> {
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 20,
               ),
               TextField(
-                maxLength: 40,
+                // maxLength: 40,
                 onChanged: (text) {
                   title = text;
                 },
                 decoration: InputDecoration(
-                  labelText: 'Object',
+                  labelText: 'Select Category',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
               const SizedBox(
-                height: 25,
+                height: 20,
               ),
               TextField(
-                maxLines: 6,
+                // maxLines: 6,
                 onChanged: (text) {
                   desc = text;
                 },
                 decoration: InputDecoration(
-                  hintText: 'Description',
+                  hintText: 'Brand',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Align(
                 alignment: Alignment.centerRight,

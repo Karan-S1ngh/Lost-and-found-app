@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:test/list_view_of_found.dart';
 import 'package:test/list_view_of_lost.dart';
 import 'package:test/animated_bottom_bar.dart';
-import 'on_click_tab.dart';
+// import 'on_click_tab.dart';
 import 'about_us_page.dart';
 import 'privacy_policy_page.dart';
 import 'help_page.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'first_page.dart';
 import 'profile_page.dart';
+import 'lostItem_add.dart';
+import 'foundItem_add.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -85,14 +87,21 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.add),
                 label: const Text('Add Item'),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const OnClickTAB();
-                      },
-                    ),
-                  );
+                  if (selectedBarIndex == 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LostItemAdd(),
+                      ),
+                    );
+                  } else if (selectedBarIndex == 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FoundItemAdd(),
+                      ),
+                    );
+                  }
                 },
               )
             : null,
