@@ -8,11 +8,11 @@ class OnClickLostCards extends StatelessWidget {
   final String imageUrl;
 
   const OnClickLostCards({
-    Key? key,
+    super.key,
     required this.username,
     required this.title,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +35,11 @@ class OnClickFoundCards extends StatelessWidget {
   final String imageUrl;
 
   const OnClickFoundCards({
-    Key? key,
+    super.key,
     required this.username,
     required this.title,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +64,13 @@ class OnClickCards extends StatelessWidget {
   final VoidCallback onPressed;
 
   const OnClickCards({
-    Key? key,
+    super.key,
     required this.username,
     required this.title,
     this.imageUrl,
     required this.showClaimButton,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/found_inform_cards.dart';
 
 class ListViewOfFound extends StatelessWidget {
-  const ListViewOfFound({Key? key}) : super(key: key);
+  const ListViewOfFound({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -9,11 +9,11 @@ import 'help_page.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'first_page.dart';
 import 'profile_page.dart';
-import 'lostItem_add.dart';
-import 'foundItem_add.dart';
+import 'lost_item_add.dart';
+import 'found_item_add.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();

@@ -271,9 +271,9 @@ class _LostItemState extends State<LostItemAdd> {
                         foregroundColor:
                             MaterialStateProperty.all(Colors.white)),
                     onPressed: () async {
-                      String Id = randomAlphaNumeric(10);
+                      String id = randomAlphaNumeric(10);
                       Map<String, dynamic> itemMap = {
-                        'Id': Id,
+                        'Id': id,
                         'category': selectedCategory,
                         'customCategory': customCategoryController.text,
                         'brand': brandController.text,
@@ -285,7 +285,7 @@ class _LostItemState extends State<LostItemAdd> {
                         'additionalInfo': additionalInfoController.text,
                       };
                       await DatabaseMethods()
-                          .addItems(itemMap, Id)
+                          .addItems(itemMap, id)
                           .then((value) {
                         Fluttertoast.showToast(
                             msg: "Lost item added successfully !",

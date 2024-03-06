@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/lost_inform_cards.dart';
 
 class ListViewOfLost extends StatelessWidget {
-  const ListViewOfLost({Key? key}) : super(key: key);
+  const ListViewOfLost({super.key});
 
   @override
   Widget build(BuildContext context) {

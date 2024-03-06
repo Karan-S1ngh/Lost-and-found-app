@@ -11,7 +11,7 @@ import 'password_recovery_page.dart';
 import 'signup_page.dart';
 
 class LoginInPage extends StatelessWidget {
-  LoginInPage({Key? key}) : super(key: key);
+  LoginInPage({super.key});
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();

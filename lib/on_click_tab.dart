@@ -3,7 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class OnClickTAB extends StatefulWidget {
-  const OnClickTAB({Key? key}) : super(key: key);
+  const OnClickTAB({super.key});
 
   @override
   State<OnClickTAB> createState() => _OnClickTABState();

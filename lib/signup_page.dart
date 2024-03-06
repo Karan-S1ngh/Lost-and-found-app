@@ -8,7 +8,7 @@ import 'package:test/first_page.dart';
 import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  const SignUpPage({super.key});
 
   //chatgpt didn't have lines from 12-13
   @override

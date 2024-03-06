@@ -33,7 +33,7 @@ class AnimatedButton extends StatefulWidget {
   final Function onTap;
 
   const AnimatedButton({
-    Key? key,
+    super.key,
     required this.initialText,
     required this.finalText,
     required this.iconData,
@@ -41,7 +41,7 @@ class AnimatedButton extends StatefulWidget {
     required this.animationDuration,
     required this.buttonStyle,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   State<AnimatedButton> createState() => _AnimatedButtonState();

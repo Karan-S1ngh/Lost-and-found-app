@@ -7,11 +7,11 @@ class FoundInformCards extends StatelessWidget {
   final String? imageUrl; // Made imageUrl nullable for optional input
 
   const FoundInformCards({
-    Key? key,
+    super.key,
     required this.username,
     required this.title,
     this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
