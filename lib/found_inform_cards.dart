@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:test/on_click_cards.dart';
 
 class FoundInformCards extends StatelessWidget {
-  final String username;
-  final String title;
+  final String lostSince;
+  final String location1;
   final String? imageUrl; // Made imageUrl nullable for optional input
 
   const FoundInformCards({
     super.key,
-    required this.username,
-    required this.title,
+    required this.lostSince,
+    required this.location1,
     this.imageUrl,
   });
 
@@ -23,9 +23,10 @@ class FoundInformCards extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => OnClickFoundCards(
-                  username: username,
-                  title: title,
-                  imageUrl: imageUrl ?? "", // Use empty string if imageUrl is null
+                  lostSince: lostSince,
+                  location1: location1,
+                  imageUrl: imageUrl ?? "", brand: '', color: '', category: '',
+                  location2: '', // Use empty string if imageUrl is null
                 ),
               ),
             );
@@ -73,7 +74,7 @@ class FoundInformCards extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      username,
+                      lostSince,
                       style: const TextStyle(
                         fontFamily: 'Raleway-Light',
                         color: Colors.white70,
@@ -97,7 +98,7 @@ class FoundInformCards extends StatelessWidget {
                       direction: Axis.horizontal,
                       children: <Widget>[
                         Text(
-                          title,
+                          location1,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 23,

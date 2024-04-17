@@ -10,26 +10,26 @@ class ListViewOfFound extends StatelessWidget {
       children: const <Widget>[
         SizedBox(height: 30),
         FoundInformCards(
-          username: "@Username1",
-          title: "Title of Found Item 1",
+          lostSince: "@lostSince",
+          location1: "location1 of Found Item 1",
           imageUrl:
               "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
         ),
         FoundInformCards(
-          username: "@Username2",
-          title: "Title of Found Item 2",
+          lostSince: "@lostSince",
+          location1: "location1 of Found Item 2",
           imageUrl:
               "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
         ),
         FoundInformCards(
-          username: "@Username3",
-          title: "Title of Found Item 3",
+          lostSince: "@Username3",
+          location1: "location1 of Found Item 3",
           imageUrl:
               "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
         ),
         FoundInformCards(
-          username: "@Username4",
-          title: "Title of Found Item 4",
+          lostSince: "@Username4",
+          location1: "location1 of Found Item 4",
           ),
       ],
     );

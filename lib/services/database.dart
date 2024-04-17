@@ -7,4 +7,7 @@ class DatabaseMethods {
         .doc(id)
         .set(itemMap);
   }
+  Stream<QuerySnapshot> getItems() {
+    return FirebaseFirestore.instance.collection("Lost_Item_Add").snapshots();
+  }
 }
