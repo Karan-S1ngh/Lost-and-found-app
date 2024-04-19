@@ -1,83 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test/lost_inform_cards.dart';
+import 'package:test/services/database.dart';
+import 'package:intl/intl.dart';
 
 class ListViewOfLost extends StatefulWidget {
-  const ListViewOfLost({super.key});
+  const ListViewOfLost({Key? key}) : super(key: key);
 
   @override
-  State<ListViewOfLost> createState() => _ListViewOfLostState();
+  _ListViewOfLostState createState() => _ListViewOfLostState();
 }
 
 class _ListViewOfLostState extends State<ListViewOfLost> {
-  String searchText = ''; // Stores the current search term
-
-  List<LostInformCards> lostItems = [
-    const LostInformCards(
-      username: "@Username1",
-      title: "Title of Lost Item 1",
-      imageUrl:
-          "https://cdn.pixabay.com/photo/2016/07/07/16/46/dice-1502706_640.jpg",
-    ),
-    const LostInformCards(
-      username: "@Username2",
-      title: "Title of Lost Item 2",
-      imageUrl:
-          "https://cdn.pixabay.com/photo/2016/07/07/16/46/dice-1502706_640.jpg",
-    ),
-    const LostInformCards(
-      username: "@Username3",
-      title: "Title of Lost Item 3",
-      imageUrl:
-          "https://cdn.pixabay.com/photo/2016/07/07/16/46/dice-1502706_640.jpg",
-    ),
-    const LostInformCards(
-      username: "@Username4",
-      title: "Title of Lost Item 4",
-    ),
-  ];
-
-  List<LostInformCards> filteredItems = []; // Stores the filtered list
+  late Stream<QuerySnapshot> lostItemStream;
 
   @override
   void initState() {
     super.initState();
-    filteredItems = lostItems; // Initially show all items
+    getLostItems(); // Fetch lost items from Firestore
   }
 
-  void filterItems(String searchTerm) {
-    filteredItems = lostItems
-        .where((item) =>
-            item.title.toLowerCase().contains(searchTerm.toLowerCase()) ||
-            item.username.toLowerCase().contains(searchTerm.toLowerCase()))
-        .toList();
-    setState(() {}); // Update UI to reflect the filtered list
+  // Method to fetch lost items from Firestore
+  void getLostItems() {
+    final databaseMethods = DatabaseMethods();
+    lostItemStream = databaseMethods.getItems(); // No need to await here
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            onChanged: (value) {
-              setState(() {
-                searchText = value;
-                filterItems(searchText); // Filter on every character change
-              });
-            },
-            decoration: const InputDecoration(
-              hintText: 'Search by Username or Title',
-              prefixIcon: Icon(Icons.search),
-            ),
-          ),
-        ),
-        Expanded(
-          child: ListView(
-            children: filteredItems.map((item) => item).toList(),
-          ),
-        ),
-      ],
+    return Scaffold(
+      body: StreamBuilder<QuerySnapshot>(
+        stream: lostItemStream,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else {
+            final List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
+            return ListView.builder(
+              itemCount: documents.length,
+              itemBuilder: (context, index) {
+                final DocumentSnapshot ds = documents[index];
+                return LostInformCards(
+                  lostSince: DateFormat('MMM dd, yyyy')
+                      .format(ds['lostSince'].toDate()),
+                  brand: ds['brand'], // Fetch brand from Firestore
+                  category: ds['category'], // Fetch category from Firestore
+                  colour: ds['colour'],
+                  location1: ds['location1'],
+                  location2: ds['location2'],
+                  // imageUrl: ds['imageUrl'],
+                );
+              },
+            );
+          }
+        },
+      ),
     );
   }
 }

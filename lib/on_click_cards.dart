@@ -3,22 +3,34 @@ import 'claim_page.dart';
 import 'found_page.dart';
 
 class OnClickLostCards extends StatelessWidget {
-  final String username;
-  final String title;
-  final String imageUrl;
+  final String category;
+  final String brand;
+  final String color;
+  final String lostSince;
+  final String location1;
+  final String location2;
+  final String? imageUrl;
 
   const OnClickLostCards({
     super.key,
-    required this.username,
-    required this.title,
-    required this.imageUrl,
+    required this.category,
+    required this.brand,
+    required this.color,
+    required this.lostSince,
+    required this.location1,
+    required this.location2,
+    this.imageUrl,
   });
 
   @override
   Widget build(BuildContext context) {
     return OnClickCards(
-      username: username,
-      title: title,
+      lostSince: lostSince,
+      location1: location1,
+      location2: location2,
+      category: category,
+      brand: brand,
+      color: color,
       imageUrl: imageUrl,
       showClaimButton: false,
       onPressed: () {
@@ -30,22 +42,34 @@ class OnClickLostCards extends StatelessWidget {
 }
 
 class OnClickFoundCards extends StatelessWidget {
-  final String username;
-  final String title;
+  final String brand;
+  final String color;
+  final String category;
+  final String lostSince;
+  final String location1;
+  final String location2;
   final String imageUrl;
 
   const OnClickFoundCards({
     super.key,
-    required this.username,
-    required this.title,
+    required this.brand,
+    required this.color,
+    required this.category,
+    required this.lostSince,
+    required this.location1,
+    required this.location2,
     required this.imageUrl,
   });
 
   @override
   Widget build(BuildContext context) {
     return OnClickCards(
-      username: username,
-      title: title,
+      lostSince: lostSince,
+      location1: location1,
+      location2: location2,
+      brand: brand,
+      color: color,
+      category: category,
       imageUrl: imageUrl,
       showClaimButton: true,
       onPressed: () {
@@ -57,16 +81,24 @@ class OnClickFoundCards extends StatelessWidget {
 }
 
 class OnClickCards extends StatelessWidget {
-  final String username;
-  final String title;
+  final String brand;
+  final String category;
+  final String color;
+  final String lostSince;
+  final String location1;
+  final String location2;
   final String? imageUrl;
   final bool showClaimButton;
   final VoidCallback onPressed;
 
   const OnClickCards({
     super.key,
-    required this.username,
-    required this.title,
+    required this.brand,
+    required this.category,
+    required this.color,
+    required this.lostSince,
+    required this.location1,
+    required this.location2,
     this.imageUrl,
     required this.showClaimButton,
     required this.onPressed,
@@ -74,7 +106,7 @@ class OnClickCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String buttonText = showClaimButton ? 'Claim' : 'Found?';
+    String buttonText = showClaimButton ? 'Claim' : 'Found ?';
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -127,17 +159,31 @@ class OnClickCards extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 20,
               ),
               Text(
-                'Object: $title',
+                'Brand: $brand',
+                style: const TextStyle(fontSize: 18),
+              ),
+              Text(
+                'Category: $category',
+                style: const TextStyle(fontSize: 18),
+              ),
+              Text(
+                'Color: $color',
+                style: const TextStyle(fontSize: 18),
+              ),
+              Text(
+                'Might be lost at:\n'
+                '      Location 1: $location1\n'
+                '      Location 2: $location2',
                 style: const TextStyle(fontSize: 18),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
-                'Username: @$username',
+                'Lost Since: $lostSince',
                 style: const TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 20),
@@ -149,7 +195,8 @@ class OnClickCards extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: onPressed,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+                      backgroundColor: const Color.fromARGB(255, 109, 57, 199),
+                      foregroundColor: Colors.white,
                     ),
                     child: Text(buttonText),
                   ),

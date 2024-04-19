@@ -2,32 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:test/on_click_cards.dart';
 
 class LostInformCards extends StatelessWidget {
-  final String username;
-  final String title;
+  final String lostSince;
+  final String location1;
+  final String location2;
   final String? imageUrl; // Made imageUrl nullable for optional input
+  final String brand; // Add brand
+  final String category; // Add category
+  final String colour; // Add color
 
   const LostInformCards({
-    super.key,
-    required this.username,
-    required this.title,
+    Key? key,
+    required this.lostSince,
+    required this.location1,
+    required this.location2,
     this.imageUrl,
+    required this.brand,
+    required this.category,
+    required this.colour,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        SizedBox(height: 10),
         InkWell(
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => OnClickLostCards(
-                  username: username,
-                  title: title,
-                  imageUrl:
-                      imageUrl ?? "", // Use empty string if imageUrl is null
-                ),
+                    lostSince: lostSince,
+                    location1: location1,
+                    brand: brand,
+                    category: category,
+                    color: colour,
+                    location2: location2,
+                    imageUrl: null // Use empty string if imageUrl is null
+                    ),
               ),
             );
           },
@@ -36,7 +48,7 @@ class LostInformCards extends StatelessWidget {
             children: <Widget>[
               Container(
                 width: 300,
-                height: 220,
+                height: 240,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: const Color.fromARGB(255, 124, 87, 137),
@@ -65,47 +77,52 @@ class LostInformCards extends StatelessWidget {
                       ),
               ),
               Positioned(
-                top: 140,
+                top: 135,
                 left: 20,
                 child: Container(
                   width: 200,
-                  height: 25,
-                  color: Colors.transparent,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      username,
-                      style: const TextStyle(
-                        fontFamily: 'Raleway-Light',
-                        color: Colors.white70,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 160,
-                left: 20,
-                child: Container(
-                  width: 200,
-                  height: 60,
+                  height: 93,
                   color: Colors.transparent,
                   child: Align(
                     alignment: Alignment.topLeft,
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      children: <Widget>[
-                        Text(
-                          title,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 23,
-                            fontWeight: FontWeight.w800,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Lost Since: $lostSince',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
-                        ),
-                      ],
+                          Text(
+                            'Brand: $brand',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Text(
+                            'Category: $category',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Text(
+                            'Color: $colour',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -113,8 +130,9 @@ class LostInformCards extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 50),
+        const SizedBox(height: 35),
       ],
     );
   }
 }
+//42:30

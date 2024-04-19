@@ -271,10 +271,13 @@ class _LostItemState extends State<LostItemAdd> {
                         foregroundColor:
                             MaterialStateProperty.all(Colors.white)),
                     onPressed: () async {
-                      String id = randomAlphaNumeric(10);
+                      String id = randomAlphaNumeric(5);
+                      String category = selectedCategory == 'Others'
+                          ? customCategoryController.text
+                          : selectedCategory;
                       Map<String, dynamic> itemMap = {
                         'Id': id,
-                        'category': selectedCategory,
+                        'category': category,
                         'customCategory': customCategoryController.text,
                         'brand': brandController.text,
                         'colour': colourController.text,
@@ -295,7 +298,7 @@ class _LostItemState extends State<LostItemAdd> {
                             backgroundColor:
                                 const Color.fromARGB(255, 109, 57, 199),
                             textColor: Colors.white,
-                            fontSize: 16.0);
+                            fontSize: 24.0);
                       });
                     },
                     child: const Text(
