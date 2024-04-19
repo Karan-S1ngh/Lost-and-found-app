@@ -47,8 +47,10 @@ class _ListViewOfLostState extends State<ListViewOfLost> {
               itemBuilder: (context, index) {
                 final DocumentSnapshot ds = documents[index];
                 return LostInformCards(
-                  lostSince: DateFormat('MMM dd, yyyy')
-                      .format(ds['lostSince'].toDate()),
+                  lostSince: ds['lostSince'] != null
+                      ? DateFormat('MMM dd, yyyy')
+                          .format((ds['lostSince'] as Timestamp).toDate())
+                      : 'Unknown date',
                   brand: ds['brand'], // Fetch brand from Firestore
                   category: ds['category'], // Fetch category from Firestore
                   colour: ds['colour'],
