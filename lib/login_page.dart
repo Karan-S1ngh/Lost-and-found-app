@@ -1,7 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test/components/square_tile.dart';
@@ -9,6 +6,7 @@ import 'package:test/home_page.dart';
 import 'package:logger/logger.dart';
 import 'password_recovery_page.dart';
 import 'signup_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginInPage extends StatelessWidget {
   LoginInPage({super.key});
@@ -16,6 +14,8 @@ class LoginInPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final logger = Logger();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   Future<void> _handleLogin(BuildContext context) async {
     String email = _emailController.text.trim();
@@ -27,11 +27,10 @@ class LoginInPage extends StatelessWidget {
     }
 
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       if (userCredential.user != null) {
         // User logged in successfully, navigate to home page
-
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
@@ -51,18 +50,45 @@ class LoginInPage extends StatelessWidget {
     }
   }
 
+  Future<void> _handleGoogleSignIn(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        final UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+        if (userCredential.user != null) {
+          // User logged in successfully, navigate to home page
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        }
+      } else {
+        _showSnackBar(context, 'Google sign-in cancelled');
+      }
+    } catch (error) {
+      logger.e('Error signing in with Google: $error');
+      _showSnackBar(context, 'Failed to sign in with Google');
+    }
+  }
+
   void _showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message)));
   }
 
-  // logger.d("Error during login: $e");
-  // You can show an error message to the user here if you want
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
     double fem = screenWidth / 414; // Assuming design width is 414
 
     return Scaffold(
@@ -93,7 +119,6 @@ class LoginInPage extends StatelessWidget {
                     child: const Icon(Icons.arrow_back, size: 30),
                   ),
                 ),
-
                 SizedBox(height: 4 * fem),
                 Container(
                   margin: EdgeInsets.only(bottom: 8 * fem),
@@ -136,7 +161,6 @@ class LoginInPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                // // SizedBox(height: 50 * fem),
                 _buildInputField('EMAIL', fem),
                 SizedBox(height: 30 * fem),
                 _buildInputField('PASSWORD', fem, isPassword: true),
@@ -170,16 +194,16 @@ class LoginInPage extends StatelessWidget {
                 SizedBox(height: 26 * fem),
                 _buildLoginInButton(fem, context),
                 SizedBox(height: 20 * fem),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
                       "Don't have an account ? ",
                       style: TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 19.5),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 19.5,
+                      ),
                     ),
-                    // clicking on sign up in login page
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -194,18 +218,17 @@ class LoginInPage extends StatelessWidget {
                       child: const Text(
                         "Sign Up",
                         style: TextStyle(
-                            color: Color.fromARGB(255, 109, 57, 199),
-                            decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 20),
+                          color: Color.fromARGB(255, 109, 57, 199),
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20,
+                        ),
                       ),
                     )
                   ],
                 ),
                 SizedBox(height: 29 * fem),
-
-                // or login with google or apple
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     children: [
@@ -219,8 +242,9 @@ class LoginInPage extends StatelessWidget {
                         child: Text(
                           " Or login with ",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 112, 111, 111),
-                              fontSize: 17),
+                            color: Color.fromARGB(255, 112, 111, 111),
+                            fontSize: 17,
+                          ),
                         ),
                       ),
                       Expanded(
@@ -231,14 +255,18 @@ class LoginInPage extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                const SizedBox(height: 19),
-                const Row(
+                SizedBox(height: 19),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SquareTile(imagePath: 'lib/images/google.png'),
+                    GestureDetector(
+                      onTap: () {
+                        _handleGoogleSignIn(context);
+                      },
+                      child: SquareTile(imagePath: 'lib/images/google.png'),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),

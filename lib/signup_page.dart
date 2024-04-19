@@ -1,16 +1,14 @@
-//import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:test/components/square_tile.dart';
-import 'package:test/first_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'login_page.dart';
+import 'home_page.dart';
+import 'first_page.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+  const SignUpPage({Key? key}) : super(key: key);
 
-  //chatgpt didn't have lines from 12-13
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
@@ -22,9 +20,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   void _handleSignUp() async {
     String email = _emailController.text.trim();
-    // ignore: unused_local_variable
     String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
 
@@ -34,15 +34,16 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-      // ignore: use_build_context_synchronously
+      // ignore: unused_local_variable
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const FirstPage()),
       );
-
-      // User created successfully, you can handle the navigation or additional tasks here.
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         _showSnackBar('The password provided is too weak.');
@@ -61,10 +62,39 @@ class _SignUpPageState extends State<SignUpPage> {
         .showSnackBar(SnackBar(content: Text(message)));
   }
 
+  Future<void> _handleGoogleSignIn() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        final UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+        if (userCredential.user != null) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        }
+      } else {
+        _showSnackBar('Google sign-in cancelled');
+      }
+    } catch (error) {
+      print('Error signing in with Google: $error');
+      _showSnackBar('Failed to sign in with Google');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
     double fem = screenWidth / 414;
 
     return Scaffold(
@@ -125,17 +155,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     color: Colors.black,
                   ),
                 ),
-
-                // const SizedBox(height: 45),
                 _buildInputField('EMAIL', fem),
                 SizedBox(height: 24 * fem),
                 _buildInputField('USERNAME', fem),
                 SizedBox(height: 24 * fem),
                 _buildInputField('PASSWORD', fem, isPassword: true),
                 SizedBox(height: 22 * fem),
-                _buildSignUpButton(fem, context),
+                _buildSignUpButton(fem),
                 SizedBox(height: 14 * fem),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -144,7 +171,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500, fontSize: 19.5),
                     ),
-                    // clicking on login in sign up page
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -168,7 +194,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   ],
                 ),
                 SizedBox(height: 25 * fem),
-                // or login with google or apple
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -195,12 +220,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 19),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SquareTile(imagePath: 'lib/images/google.png'),
+                    GestureDetector(
+                      onTap: () {
+                        _handleGoogleSignIn();
+                      },
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('lib/images/google.png'),
+                        radius: 20,
+                      ),
+                    ),
                   ],
                 )
               ],
@@ -239,7 +271,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _buildSignUpButton(double fem, BuildContext context) {
+  Widget _buildSignUpButton(double fem) {
     return Container(
       width: double.infinity,
       height: 60 * fem,
@@ -248,10 +280,7 @@ class _SignUpPageState extends State<SignUpPage> {
         borderRadius: BorderRadius.circular(30 * fem),
       ),
       child: ElevatedButton(
-        onPressed: () {
-          _handleSignUp();
-        },
-        // ignore: sort_child_properties_last
+        onPressed: _handleSignUp,
         child: Text(
           'SIGN UP',
           textAlign: TextAlign.center,
