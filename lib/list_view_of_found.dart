@@ -18,25 +18,25 @@ class _ListViewOfFoundState extends State<ListViewOfFound> {
     super.initState();
     // Assuming you have a way to fetch found items
     _allItems = [
-      FoundInformCards(
+      const FoundInformCards(
         lostSince: "@lostSince",
         location1: "location1 of Found Item 1",
         imageUrl:
             "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
       ),
-      FoundInformCards(
+      const FoundInformCards(
         lostSince: "@lostSince",
         location1: "location1 of Found Item 2",
         imageUrl:
             "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
       ),
-      FoundInformCards(
+      const FoundInformCards(
         lostSince: "@Username3",
         location1: "location1 of Found Item 3",
         imageUrl:
             "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
       ),
-      FoundInformCards(
+      const FoundInformCards(
         lostSince: "@Username4",
         location1: "location1 of Found Item 4",
       ),
@@ -47,15 +47,19 @@ class _ListViewOfFoundState extends State<ListViewOfFound> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea( // Avoids top padding on some devices
+      body: SafeArea(
+        // Avoids top padding on some devices
         child: Column(
           children: [
             // Add top padding to the Column
             Padding(
-              padding: const EdgeInsets.only(top: 16.0), // Adjust top padding as needed
-              child: Row( // Use Row for horizontal placement
+              padding: const EdgeInsets.only(
+                  top: 16.0), // Adjust top padding as needed
+              child: Row(
+                // Use Row for horizontal placement
                 children: [
-                  Expanded( // Ensures search bar fills all horizontal space
+                  Expanded(
+                    // Ensures search bar fills all horizontal space
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: TextField(
@@ -66,7 +70,8 @@ class _ListViewOfFoundState extends State<ListViewOfFound> {
                           fillColor: Colors.white, // Solid background color
                           filled: true,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                            borderRadius:
+                                BorderRadius.circular(10.0), // Rounded corners
                           ),
                         ),
                         onChanged: (value) => _filterFoundItems(value),
@@ -77,14 +82,16 @@ class _ListViewOfFoundState extends State<ListViewOfFound> {
               ),
             ),
             const SizedBox(height: 10.0), // Add some spacing
-            Expanded( // Ensures list view fills remaining space
+            Expanded(
+              // Ensures list view fills remaining space
               child: ListView.builder(
                 itemCount: _filteredItems.length,
                 itemBuilder: (context, index) {
                   // Add spacing before the first item only
                   if (index == 0) {
                     return Padding(
-                      padding: const EdgeInsets.only(top: 16.0), // Adjust top padding as needed
+                      padding: const EdgeInsets.only(
+                          top: 16.0), // Adjust top padding as needed
                       child: _filteredItems[index],
                     );
                   }
