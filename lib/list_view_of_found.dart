@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test/found_inform_cards.dart'; // Assuming this holds your FoundInformCards class
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+import 'package:test/services/database.dart';
 
 class ListViewOfFound extends StatefulWidget {
   const ListViewOfFound({super.key});
@@ -9,39 +12,27 @@ class ListViewOfFound extends StatefulWidget {
 }
 
 class _ListViewOfFoundState extends State<ListViewOfFound> {
-  final _searchTextController = TextEditingController();
-  List<FoundInformCards> _allItems = []; // To store all found items
-  List<FoundInformCards> _filteredItems = []; // To store filtered items
+  late Stream<QuerySnapshot> foundItemStream;
+  String searchTerm = ''; // Store the search term
+  final TextEditingController _searchController =
+      TextEditingController(); // New controller
 
   @override
   void initState() {
     super.initState();
-    // Assuming you have a way to fetch found items
-    _allItems = [
-      const FoundInformCards(
-        lostSince: "@lostSince",
-        location1: "location1 of Found Item 1",
-        imageUrl:
-            "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
-      ),
-      const FoundInformCards(
-        lostSince: "@lostSince",
-        location1: "location1 of Found Item 2",
-        imageUrl:
-            "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
-      ),
-      const FoundInformCards(
-        lostSince: "@Username3",
-        location1: "location1 of Found Item 3",
-        imageUrl:
-            "https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png",
-      ),
-      const FoundInformCards(
-        lostSince: "@Username4",
-        location1: "location1 of Found Item 4",
-      ),
-    ];
-    _filteredItems = _allItems; // Initially show all items
+    getFoundItems(); // Fetch found items from Firestore
+  }
+
+  // Method to fetch found items from Firestore
+  void getFoundItems() {
+    final databaseMethods = DatabaseMethods();
+    foundItemStream = databaseMethods.getFoundItems(); // No need to await here
+  }
+
+  void filterItems(String term) {
+    setState(() {
+      searchTerm = term.toLowerCase(); // Lowercase for case-insensitive search
+    });
   }
 
   @override
@@ -63,7 +54,8 @@ class _ListViewOfFoundState extends State<ListViewOfFound> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: TextField(
-                        controller: _searchTextController,
+                        controller: _searchController,
+                        onChanged: (value) => filterItems(value),
                         decoration: InputDecoration(
                           hintText: 'Search Found Items',
                           prefixIcon: const Icon(Icons.search),
@@ -74,7 +66,6 @@ class _ListViewOfFoundState extends State<ListViewOfFound> {
                                 BorderRadius.circular(10.0), // Rounded corners
                           ),
                         ),
-                        onChanged: (value) => _filterFoundItems(value),
                       ),
                     ),
                   ),
@@ -84,18 +75,45 @@ class _ListViewOfFoundState extends State<ListViewOfFound> {
             const SizedBox(height: 10.0), // Add some spacing
             Expanded(
               // Ensures list view fills remaining space
-              child: ListView.builder(
-                itemCount: _filteredItems.length,
-                itemBuilder: (context, index) {
-                  // Add spacing before the first item only
-                  if (index == 0) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                          top: 16.0), // Adjust top padding as needed
-                      child: _filteredItems[index],
+              child: StreamBuilder<QuerySnapshot>(
+                stream: foundItemStream,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  } else {
+                    final List<QueryDocumentSnapshot> documents =
+                        snapshot.data!.docs;
+                    final filteredDocs = searchTerm.isEmpty
+                        ? documents
+                        : documents
+                            .where((doc) => _matchesSearchTerm(doc))
+                            .toList();
+
+                    return ListView.builder(
+                      itemCount: filteredDocs.length,
+                      itemBuilder: (context, index) {
+                        final DocumentSnapshot ds = filteredDocs[index];
+                        return FoundInformCards(
+                          foundOn: ds['foundOn'] != null
+                              ? DateFormat('MMM dd, yyyy')
+                                  .format((ds['foundOn'] as Timestamp).toDate())
+                              : 'Unknown date',
+                          brand: ds['brand'], // Fetch brand from Firestore
+                          category:
+                              ds['category'], // Fetch category from Firestore
+                          colour: ds['colour'],
+                          location1: ds['location1'],
+                          // imageUrl: ds['imageUrl'],
+                        );
+                      },
                     );
                   }
-                  return _filteredItems[index];
                 },
               ),
             ),
@@ -105,21 +123,20 @@ class _ListViewOfFoundState extends State<ListViewOfFound> {
     );
   }
 
-  void _filterFoundItems(String searchText) {
-    if (searchText.isEmpty) {
-      setState(() {
-        _filteredItems = _allItems; // Show all items if search text is empty
-      });
-      return;
-    }
+  bool _matchesSearchTerm(DocumentSnapshot doc) {
+    final String lowerCaseTerm = searchTerm;
+    final String lowerCaseBrand = doc['brand'].toString().toLowerCase();
+    final String lowerCaseCategory = doc['category'].toString().toLowerCase();
+    final String lowerCaseColour = doc['colour'].toString().toLowerCase();
+    final String lowerCaseDate = doc['foundOn'] != null
+        ? DateFormat('MMM dd, yyyy')
+            .format((doc['foundOn'] as Timestamp).toDate())
+            .toLowerCase()
+        : 'Unknown date';
 
-    final lowercaseSearchText = searchText.toLowerCase();
-    final filteredItems = _allItems.where((item) =>
-        item.lostSince.toLowerCase().contains(lowercaseSearchText) ||
-        item.location1.toLowerCase().contains(lowercaseSearchText));
-
-    setState(() {
-      _filteredItems = filteredItems.toList(); // Update filtered items
-    });
+    return lowerCaseBrand.contains(lowerCaseTerm) ||
+        lowerCaseCategory.contains(lowerCaseTerm) ||
+        lowerCaseColour.contains(lowerCaseTerm) ||
+        lowerCaseDate.contains(lowerCaseTerm);
   }
 }

@@ -12,7 +12,7 @@ class OnClickLostCards extends StatelessWidget {
   final String? imageUrl;
 
   const OnClickLostCards({
-    super.key,
+    Key? key,
     required this.category,
     required this.brand,
     required this.color,
@@ -25,17 +25,19 @@ class OnClickLostCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OnClickCards(
+      brand: brand,
+      category: category,
+      color: color,
       lostSince: lostSince,
       location1: location1,
       location2: location2,
-      category: category,
-      brand: brand,
-      color: color,
       imageUrl: imageUrl,
       showClaimButton: false,
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const FoundPage()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const FoundPage()),
+        );
       },
     );
   }
@@ -45,36 +47,37 @@ class OnClickFoundCards extends StatelessWidget {
   final String brand;
   final String color;
   final String category;
-  final String lostSince;
+  final String foundOn;
   final String location1;
-  final String location2;
-  final String imageUrl;
+  final String? imageUrl;
 
   const OnClickFoundCards({
-    super.key,
+    Key? key,
     required this.brand,
     required this.color,
     required this.category,
-    required this.lostSince,
+    required this.foundOn,
     required this.location1,
-    required this.location2,
-    required this.imageUrl,
+    this.imageUrl,
   });
 
   @override
   Widget build(BuildContext context) {
     return OnClickCards(
-      lostSince: lostSince,
-      location1: location1,
-      location2: location2,
       brand: brand,
-      color: color,
       category: category,
+      color: color,
+      lostSince: foundOn, // Here, `foundOn` is used as `lostSince`
+      location1: location1,
+      location2:
+          '', // Since found items don't have `location2`, it's left empty
       imageUrl: imageUrl,
       showClaimButton: true,
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const ClaimPage()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ClaimPage()),
+        );
       },
     );
   }
@@ -92,7 +95,7 @@ class OnClickCards extends StatelessWidget {
   final VoidCallback onPressed;
 
   const OnClickCards({
-    super.key,
+    Key? key,
     required this.brand,
     required this.category,
     required this.color,
@@ -107,20 +110,24 @@ class OnClickCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String buttonText = showClaimButton ? 'Claim' : 'Found ?';
+    String locationText = showClaimButton ? 'Found at' : 'Might be lost at';
+    String timeText = showClaimButton ? 'Found on' : 'Lost since';
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 182, 4, 242),
-        title: const Text(
+        title: const Align(
+          alignment: Alignment.center,
+          child: Text(
             'Item Info',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 23,
             ),
           ),
-          centerTitle: true,
         ),
+      ),
       body: Align(
         alignment: Alignment.center,
         child: SizedBox(
@@ -172,7 +179,7 @@ class OnClickCards extends StatelessWidget {
                 style: const TextStyle(fontSize: 18),
               ),
               Text(
-                'Might be lost at:\n'
+                '$locationText:\n'
                 '      Location 1: $location1\n'
                 '      Location 2: $location2',
                 style: const TextStyle(fontSize: 18),
@@ -181,7 +188,7 @@ class OnClickCards extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                'Lost Since: $lostSince',
+                '$timeText: $lostSince\n',
                 style: const TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 20),
