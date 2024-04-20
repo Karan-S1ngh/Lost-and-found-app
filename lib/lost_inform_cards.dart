@@ -25,7 +25,7 @@ class LostInformCards extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         InkWell(
           onTap: () {
             Navigator.push(
