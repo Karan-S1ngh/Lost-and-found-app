@@ -8,14 +8,21 @@ import 'password_recovery_page.dart';
 import 'signup_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class LoginInPage extends StatelessWidget {
-  LoginInPage({super.key});
+class LoginInPage extends StatefulWidget {
+  LoginInPage({Key? key}) : super(key: key);
 
+  @override
+  _LoginInPageState createState() => _LoginInPageState();
+}
+
+class _LoginInPageState extends State<LoginInPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final logger = Logger();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  bool _isObscured = true;
 
   Future<void> _handleLogin(BuildContext context) async {
     String email = _emailController.text.trim();
@@ -280,7 +287,7 @@ class LoginInPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 22 * fem),
       child: TextField(
         controller: isPassword ? _passwordController : _emailController,
-        obscureText: isPassword,
+        obscureText: isPassword ? _isObscured : false,
         style: TextStyle(
           fontSize: 18 * fem,
           fontWeight: FontWeight.w700,
@@ -296,6 +303,19 @@ class LoginInPage extends StatelessWidget {
           focusedBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: Color(0xFF000000)),
           ),
+          suffixIcon: isPassword
+              ? IconButton(
+                  icon: Icon(
+                    _isObscured ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isObscured = !_isObscured;
+                    });
+                  },
+                )
+              : null,
         ),
       ),
     );

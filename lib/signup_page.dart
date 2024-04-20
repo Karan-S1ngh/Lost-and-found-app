@@ -7,7 +7,7 @@ import 'home_page.dart';
 import 'first_page.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  const SignUpPage({super.key});
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -22,6 +22,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  bool _isObscured = true;
 
   void _handleSignUp() async {
     String email = _emailController.text.trim();
@@ -41,6 +43,7 @@ class _SignUpPageState extends State<SignUpPage> {
         password: password,
       );
       Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(builder: (context) => const FirstPage()),
       );
@@ -250,7 +253,7 @@ class _SignUpPageState extends State<SignUpPage> {
         controller: isPassword
             ? _passwordController
             : (label == 'EMAIL' ? _emailController : _usernameController),
-        obscureText: isPassword,
+        obscureText: isPassword ? _isObscured : false,
         style: TextStyle(
           fontSize: 18 * fem,
           fontWeight: FontWeight.w700,
@@ -266,6 +269,19 @@ class _SignUpPageState extends State<SignUpPage> {
           focusedBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: Color(0xFF000000)),
           ),
+          suffixIcon: isPassword
+              ? IconButton(
+                  icon: Icon(
+                    _isObscured ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isObscured = !_isObscured;
+                    });
+                  },
+                )
+              : null,
         ),
       ),
     );
