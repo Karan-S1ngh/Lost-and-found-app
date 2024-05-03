@@ -30,7 +30,7 @@ class AboutUsPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 27,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 109, 57, 199),
+                  color: Color.fromARGB(255, 28, 41, 66),
                 ),
               ),
               const SizedBox(height: 20),
@@ -76,7 +76,7 @@ class AboutUsPage extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      const Color.fromARGB(255, 109, 57, 199), // Button color
+                      const Color.fromARGB(255, 102, 140, 147), // Button color
                 ),
                 child: const Padding(
                   padding:
@@ -103,14 +103,14 @@ class FeatureTile extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  const FeatureTile({super.key,required this.icon, required this.text});
+  const FeatureTile({super.key, required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(
         icon,
-        color: const Color.fromARGB(255, 109, 57, 199), // Icon color
+        color: const Color.fromARGB(255, 238, 172, 102), // Icon color
         size: 27,
       ),
       title: Text(

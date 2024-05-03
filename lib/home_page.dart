@@ -82,10 +82,13 @@ class _HomePageState extends State<HomePage> {
                 selectedBarIndex ==
                     1 //to remove Add item button from About, Help & Privacy
             ? FloatingActionButton.extended(
-                backgroundColor: const Color.fromARGB(255, 109, 57, 199),
-                foregroundColor: Colors.white,
+                backgroundColor: Color.fromARGB(255, 238, 172, 102),
+                foregroundColor: Colors.black,
                 icon: const Icon(Icons.add),
-                label: const Text('Add Item'),
+                label: const Text(
+                  'Add Item',
+                  style: TextStyle(fontSize: 16),
+                ),
                 onPressed: () {
                   if (selectedBarIndex == 0) {
                     Navigator.push(

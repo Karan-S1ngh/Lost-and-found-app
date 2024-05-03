@@ -6,6 +6,7 @@ import 'first_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'help_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -93,12 +94,17 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  // Handle "Contact Us" button tap
-                  // You can navigate to a contact form or contact details page
-                },
-                child: const Text('Contact Us'),
-              ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HelpPage()),
+                    );
+                  },
+                  child: const Text('Contact Us'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 102, 140, 147),
+                    foregroundColor: Colors.white,
+                  )),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () => _signOut(context),
@@ -106,8 +112,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 // ignore: sort_child_properties_last
                 label: const Text('Sign Out'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(
-                      255, 255, 17, 0), // Set sign-out button color to red
+                  backgroundColor: const Color.fromARGB(255, 238, 172, 102),
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // Rounded corners
+                  ),
+                  elevation: 5, // Shadow
+                  minimumSize: Size(200, 50), // Minimum size
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 12), // Padding
                 ),
               ),
             ],

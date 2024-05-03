@@ -116,7 +116,7 @@ class OnClickCards extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+        backgroundColor: const Color.fromARGB(255, 102, 140, 147),
         title: const Align(
           alignment: Alignment.center,
           child: Text(
@@ -200,8 +200,8 @@ class OnClickCards extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: onPressed,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 109, 57, 199),
-                      foregroundColor: Colors.white,
+                      backgroundColor: const Color.fromARGB(255, 238, 172, 102),
+                      foregroundColor: Colors.black,
                     ),
                     child: Text(buttonText),
                   ),
