@@ -65,12 +65,12 @@ class FirstPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 129, 128, 128),
-                  foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                ),
+                    backgroundColor: const Color.fromARGB(255, 238, 172, 102),
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    elevation: 9),
                 child: const Text('LOGIN'),
               ),
             ),
@@ -86,11 +86,12 @@ class FirstPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 129, 128, 128),
+                  backgroundColor: const Color.fromARGB(255, 238, 172, 102),
                   foregroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
+                  elevation: 9,
                 ),
                 child: const Text('SIGNUP'),
               ),
@@ -107,11 +108,14 @@ class FirstPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 129, 128, 128),
-                  foregroundColor: Colors.black,
+                  backgroundColor: const Color.fromARGB(255, 102, 140, 147),
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(10), // Rounded corners
                   ),
+                  minimumSize: const Size(200, 50), // Minimum size
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 12), // Padding
                 ),
                 child: const Text('ADMIN LOGIN'),
               ),

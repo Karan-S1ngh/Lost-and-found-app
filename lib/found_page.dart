@@ -29,7 +29,7 @@ class _FoundPageState extends State<FoundPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+        backgroundColor: const Color.fromARGB(255, 238, 172, 102),
         title: const Text('Found Item Page'),
       ),
       body: Padding(
@@ -127,7 +127,8 @@ class _FoundPageState extends State<FoundPage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+                  backgroundColor: const Color.fromARGB(255, 102, 140, 147),
+                  foregroundColor: Colors.white,
                 ),
                 child: const Text('Submit Found Item'),
               ),

@@ -39,7 +39,7 @@ class _ClaimPageState extends State<ClaimPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 182, 4, 242),
+        backgroundColor: const Color.fromARGB(255, 238, 172, 102),
         title: const Text('Claimed Item Page'),
       ),
       body: Padding(
@@ -139,8 +139,14 @@ class _ClaimPageState extends State<ClaimPage> {
                   }
                 },
                 // ignore: sort_child_properties_last
-                child: const Text('Submit Claimed Item'),
-                color: const Color.fromARGB(255, 182, 4, 242),
+                child: const Text(
+                  'Submit Claimed Item',
+                  style: TextStyle(
+                      color:
+                          Colors.white), // This changes the color of the text
+                ),
+                color: const Color.fromARGB(255, 102, 140,
+                    147), // This changes the background color of the button
               ),
             ],
           ),
