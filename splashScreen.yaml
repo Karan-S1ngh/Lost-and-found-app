@@ -1,9 +1,9 @@
 flutter_native_splash:
-  color: "#ffffff"
-  image: assets/logo/splash screen logo.png
+  color: "#000000" # Change the color to black
+  image: assets/logo/splash_screen_logo.png
 
   android_12:
-    color: "#ffffff"
-    image: assets/logo/splash screen logo.png
+    color: "#000000" # Change the color to black
+    image: assets/logo/splash_screen_logo.png
 
   web: false

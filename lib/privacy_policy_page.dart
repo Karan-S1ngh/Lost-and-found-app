@@ -49,6 +49,7 @@ class PrivacyPolicyPage extends StatelessWidget {
                 "Your privacy and satisfaction are our top priorities. If you have any concerns or suggestions regarding our privacy policy, please contact us.",
                 style: TextStyle(
                     fontSize: 20, color: Color.fromARGB(255, 238, 172, 102)),
+                textAlign: TextAlign.center,
               ),
             ],
           ),

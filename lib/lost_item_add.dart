@@ -1,7 +1,9 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
-
+import 'dart:io';
 import 'services/database.dart';
 
 class LostItemAdd extends StatefulWidget {
@@ -36,6 +38,43 @@ class _LostItemState extends State<LostItemAdd> {
     }
   }
 
+  File? _imageFile;
+  ImagePicker imagePicker = ImagePicker();
+  Future<void> _chooseImage() async {
+    XFile? pickedFile =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
+  void _validate() {
+    if (_imageFile == null) {
+    } else {
+      _uploadImage();
+    }
+  }
+
+  void _uploadImage() {
+    String imageFileName = DateTime.now().millisecondsSinceEpoch.toString();
+    final Reference storageReference =
+        FirebaseStorage.instance.ref().child('Images').child(imageFileName);
+    final UploadTask uploadTask = storageReference.putFile(_imageFile!);
+    uploadTask.then((TaskSnapshot taskSnapshot) {
+      taskSnapshot.ref.getDownloadURL().then((imageUrl) {
+        _saveData(imageUrl);
+      });
+    }).catchError((error) {
+      Fluttertoast.showToast(msg: error.toString());
+    });
+  }
+
+  void _saveData(String imageUrl) {
+    // Save data to Firestore
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +97,47 @@ class _LostItemState extends State<LostItemAdd> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _imageFile == null
+                  ? Container(
+                      width: double.infinity,
+                      height: 200.0,
+                      color: Colors.grey,
+                      child: Center(
+                          child: ElevatedButton(
+                        onPressed: () {
+                          _chooseImage();
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 238, 172, 102)),
+                        ),
+                        child: const Text(
+                          "Upload Image",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      )),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        _chooseImage();
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 200.0,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: FileImage(_imageFile!),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+              const SizedBox(
+                height: 10.0,
+              ),
               const Text(
                 "Select Category",
                 style: TextStyle(fontSize: 20),
@@ -314,3 +394,5 @@ class _LostItemState extends State<LostItemAdd> {
     );
   }
 }
+
+
